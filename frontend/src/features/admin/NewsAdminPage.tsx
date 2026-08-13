@@ -1,0 +1,222 @@
+import { useState } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Pencil, Plus, Trash2 } from 'lucide-react'
+import { api } from '../../lib/api'
+import { newsSchema, type NewsFormValues } from '../../types/schemas'
+import type { NewsArticle } from '../../types/models'
+import Alert from '../../components/ui/Alert'
+import Badge from '../../components/ui/Badge'
+import Button from '../../components/ui/Button'
+import Card from '../../components/ui/Card'
+import ConfirmDialog from '../../components/ui/ConfirmDialog'
+import EmptyState from '../../components/ui/EmptyState'
+import Input from '../../components/ui/Input'
+import Modal from '../../components/ui/Modal'
+import PageHeader from '../../components/admin/PageHeader'
+import Select from '../../components/ui/Select'
+import Spinner from '../../components/ui/Spinner'
+import Textarea from '../../components/ui/Textarea'
+import { formatTanggal } from '../../lib/utils'
+
+const kategoriOptions = [
+  { value: 'Program Kerja', label: 'Program Kerja' },
+  { value: 'Kegiatan', label: 'Kegiatan' },
+  { value: 'Berita', label: 'Berita' },
+]
+
+export default function NewsAdminPage() {
+  const queryClient = useQueryClient()
+  const { data, isLoading } = useQuery({ queryKey: ['news'], queryFn: api.getNewsList })
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editing, setEditing] = useState<NewsArticle | null>(null)
+  const [deleting, setDeleting] = useState<NewsArticle | null>(null)
+  const [notice, setNotice] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<NewsFormValues>({ resolver: zodResolver(newsSchema) })
+
+  const showNotice = (text: string) => {
+    setNotice({ type: 'success', text })
+    setTimeout(() => setNotice(null), 3000)
+  }
+
+  const openCreate = () => {
+    setEditing(null)
+    reset({
+      judul: '',
+      kategori: 'Kegiatan',
+      tanggal: new Date().toISOString().slice(0, 10),
+      penulis: 'Karang Taruna Bencongan',
+      ringkasan: '',
+      konten: '',
+      coverUrl: '',
+    })
+    setModalOpen(true)
+  }
+
+  const openEdit = (item: NewsArticle) => {
+    setEditing(item)
+    reset({
+      judul: item.judul,
+      kategori: item.kategori,
+      tanggal: item.tanggal,
+      penulis: item.penulis,
+      ringkasan: item.ringkasan,
+      konten: item.konten,
+      coverUrl: item.coverUrl ?? '',
+    })
+    setModalOpen(true)
+  }
+
+  const onSubmit = async (values: NewsFormValues) => {
+    setNotice(null)
+    const payload = { ...values, coverUrl: values.coverUrl?.trim() || null }
+    if (editing) {
+      await api.updateNews(editing.id, payload)
+      showNotice('Berita berhasil diperbarui.')
+    } else {
+      await api.createNews(payload)
+      showNotice('Berita berhasil ditambahkan.')
+    }
+    await queryClient.invalidateQueries({ queryKey: ['news'] })
+    setModalOpen(false)
+  }
+
+  const onDelete = async () => {
+    if (!deleting) return
+    setNotice(null)
+    await api.deleteNews(deleting.id)
+    await queryClient.invalidateQueries({ queryKey: ['news'] })
+    setDeleting(null)
+    showNotice(`"${deleting.judul}" berhasil dihapus.`)
+  }
+
+  if (isLoading) return <Spinner />
+
+  return (
+    <div>
+      <PageHeader
+        title="Kegiatan & Berita"
+        description="Kelola berita dan dokumentasi program kerja Karang Taruna."
+        action={
+          <Button onClick={openCreate}>
+            <Plus className="h-4 w-4" aria-hidden />
+            Tambah Berita
+          </Button>
+        }
+      />
+
+      {notice && (
+        <Alert className="mt-5" type={notice.type} onClose={() => setNotice(null)}>
+          {notice.text}
+        </Alert>
+      )}
+
+      <div className="mt-6 space-y-4">
+        {!data || data.length === 0 ? (
+          <Card>
+            <EmptyState
+              title="Belum ada berita"
+              description="Tambahkan berita atau kegiatan pertama kamu."
+              action={
+                <Button onClick={openCreate} variant="secondary" size="sm">
+                  <Plus className="h-4 w-4" aria-hidden />
+                  Tambah Berita
+                </Button>
+              }
+            />
+          </Card>
+        ) : (
+          data.map((item) => (
+            <Card key={item.id} className="p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge tone="green">{item.kategori}</Badge>
+                    <span className="text-xs text-gray-500">{formatTanggal(item.tanggal)}</span>
+                  </div>
+                  <h2 className="mt-2 text-base font-bold text-gray-900">{item.judul}</h2>
+                  <p className="mt-1 text-sm text-gray-500">Oleh {item.penulis}</p>
+                </div>
+                <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => openEdit(item)}
+                    className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+                    aria-label={`Edit ${item.judul}`}
+                  >
+                    <Pencil className="h-4 w-4" aria-hidden />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDeleting(item)}
+                    className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                    aria-label={`Hapus ${item.judul}`}
+                  >
+                    <Trash2 className="h-4 w-4" aria-hidden />
+                  </button>
+                </div>
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+
+      <Modal
+        open={modalOpen}
+        title={editing ? 'Edit Berita' : 'Tambah Berita'}
+        onClose={() => setModalOpen(false)}
+        maxWidth="max-w-2xl"
+      >
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2" noValidate>
+          <div className="sm:col-span-2">
+            <Input label="Judul" error={errors.judul?.message} {...register('judul')} />
+          </div>
+          <Select
+            label="Kategori"
+            options={kategoriOptions}
+            error={errors.kategori?.message}
+            {...register('kategori')}
+          />
+          <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
+          <Input label="Penulis" error={errors.penulis?.message} {...register('penulis')} />
+          <Input label="URL Foto Sampul (opsional)" placeholder="https://..." error={errors.coverUrl?.message} {...register('coverUrl')} />
+          <div className="sm:col-span-2">
+            <Textarea label="Ringkasan" rows={3} error={errors.ringkasan?.message} {...register('ringkasan')} />
+          </div>
+          <div className="sm:col-span-2">
+            <Textarea
+              label="Konten (paragraf dipisah baris kosong)"
+              rows={8}
+              error={errors.konten?.message}
+              {...register('konten')}
+            />
+          </div>
+          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
+            <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
+              Batal
+            </Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Menyimpan...' : editing ? 'Simpan Perubahan' : 'Tambah Berita'}
+            </Button>
+          </div>
+        </form>
+      </Modal>
+
+      <ConfirmDialog
+        open={Boolean(deleting)}
+        title="Hapus Berita"
+        message={`Yakin ingin menghapus "${deleting?.judul}"? Tindakan ini tidak dapat dibatalkan.`}
+        onCancel={() => setDeleting(null)}
+        onConfirm={onDelete}
+      />
+    </div>
+  )
+}

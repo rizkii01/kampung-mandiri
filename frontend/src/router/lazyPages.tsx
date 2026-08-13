@@ -9,4 +9,8 @@ export const NewsDetailPage = lazy(() => import('../features/news/NewsDetailPage
 export const ContactPage = lazy(() => import('../features/contact/ContactPage'))
 export const LoginPage = lazy(() => import('../features/auth/LoginPage'))
 export const AdminDashboardPage = lazy(() => import('../features/admin/AdminDashboardPage'))
+export const ProfileAdminPage = lazy(() => import('../features/admin/ProfileAdminPage'))
+export const UmkmAdminPage = lazy(() => import('../features/admin/UmkmAdminPage'))
+export const NewsAdminPage = lazy(() => import('../features/admin/NewsAdminPage'))
+export const GalleryAdminPage = lazy(() => import('../features/admin/GalleryAdminPage'))
 export const NotFoundPage = lazy(() => import('../features/notfound/NotFoundPage'))

@@ -1,10 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { LayoutDashboard, LogOut, Sprout } from 'lucide-react'
+import { Images, Info, LayoutDashboard, LogOut, Newspaper, Sprout, Store } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 import { cn } from '../../lib/utils'
 
 const menu = [
-  { to: '/admin', label: 'Dashboard', end: true },
+  { to: '/admin', label: 'Dashboard', end: true, icon: LayoutDashboard },
+  { to: '/admin/profil', label: 'Profil Kampung', end: false, icon: Info },
+  { to: '/admin/umkm', label: 'UMKM', end: false, icon: Store },
+  { to: '/admin/kegiatan', label: 'Kegiatan & Berita', end: false, icon: Newspaper },
+  { to: '/admin/galeri', label: 'Galeri Foto', end: false, icon: Images },
 ]
 
 export default function AdminLayout() {
@@ -37,7 +41,7 @@ export default function AdminLayout() {
                 )
               }
             >
-              <LayoutDashboard className="h-4 w-4" aria-hidden />
+              <item.icon className="h-4 w-4" aria-hidden />
               {item.label}
             </NavLink>
           ))}

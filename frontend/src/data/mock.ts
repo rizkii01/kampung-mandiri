@@ -22,8 +22,8 @@ export const siteProfile: SiteProfile = {
   email: 'karangtaruna.bencongan@gmail.com',
   jamOperasional: 'Senin – Minggu, 06.00 – 18.00 WIB',
   instagram: '@sentratempebencongan',
-  heroImageUrl: null,
-  logoUrl: null,
+  heroImageUrl: '/images/hero-tempe.svg',
+  logoUrl: '/favicon.svg',
 }
 
 export const umkmList: Umkm[] = [
@@ -39,6 +39,7 @@ export const umkmList: Umkm[] = [
     status: 'AKTIF',
     produk: ['Tempe Kedelai', 'Tempe Gembus'],
     bergabungSejak: 'Januari 2024',
+    imageUrl: '/images/umkm-tempe-1.svg',
   },
   {
     id: 'umkm-2',
@@ -52,6 +53,7 @@ export const umkmList: Umkm[] = [
     status: 'AKTIF',
     produk: ['Tempe Kedelai'],
     bergabungSejak: 'Maret 2024',
+    imageUrl: '/images/umkm-tempe-2.svg',
   },
   {
     id: 'umkm-3',
@@ -65,6 +67,7 @@ export const umkmList: Umkm[] = [
     status: 'AKTIF',
     produk: ['Tempe Kedelai Premium', 'Tempe Bungkus'],
     bergabungSejak: 'Februari 2024',
+    imageUrl: '/images/activity-tempe-2.svg',
   },
   {
     id: 'umkm-4',
@@ -78,6 +81,7 @@ export const umkmList: Umkm[] = [
     status: 'AKTIF',
     produk: ['Tempe Kedelai', 'Tempe Bumbu'],
     bergabungSejak: 'April 2024',
+    imageUrl: '/images/umkm-tempe-2.svg',
   },
   {
     id: 'umkm-5',
@@ -91,6 +95,7 @@ export const umkmList: Umkm[] = [
     status: 'AKTIF',
     produk: ['Tempe Kedelai', 'Tempe Goreng Frozen'],
     bergabungSejak: 'Mei 2024',
+    imageUrl: '/images/activity-tempe-1.svg',
   },
   {
     id: 'umkm-6',
@@ -104,6 +109,7 @@ export const umkmList: Umkm[] = [
     status: 'NONAKTIF',
     produk: ['Tempe Kedelai'],
     bergabungSejak: 'Juni 2024',
+    imageUrl: '/images/activity-tempe-2.svg',
   },
 ]
 
@@ -114,11 +120,11 @@ export const newsList: NewsArticle[] = [
     ringkasan:
       'Karang Taruna Desa Bencongan meluncurkan website profil digital kampung tempe sebagai bagian dari program kerja Kampung Mandiri.',
     konten:
-      'Desa Bencongan, Klari — Karang Taruna Desa Bencongan resmi meluncurkan website profil digital Kampung Mandiri Sentra Tempe. Website ini menjadi langkah awal digitalisasi potensi kampung tempe agar dikenal oleh masyarakat luas.\n\nMelalui website ini, pengunjung dapat mengenal profil kampung, melihat daftar UMKM perajin tempe, hingga berita dan dokumentasi kegiatan yang telah dilakukan. Website ini juga menjadi salah satu bentuk transparansi program kerja Karang Taruna kepada masyarakat.\n\n"Kami berharap dengan adanya profil digital ini, Kampung Tempe Bencongan semakin dikenal dan para perajin semakin terbantu dalam pemasarannya," ujar perwakilan Karang Taruna.\n\nKegiatan peluncuran dihadiri oleh perangkat desa, tokoh masyarakat, dan para perajin tempe setempat.',
+      'Desa Bencongan, Klari — Karang Taruna Desa Bencongan resmi meluncurkan website profil digital Kampung Mandiri Sentra Tempe. Website ini menjadi langkah awal digitalisasi potensi kampung tempe agar dikenal oleh masyarakat luas.\n\nMelalui website ini, pengunjung dapat mengenal profil kampung, melihat daftar UMKM perajin tempe, hingga berita dan dokumentasi kegiatan yang telah dilakukan. Website ini juga menjadi salah satu bentuk transparansi program kerja Karang Taruna kepada masyarakat.\n\n"Kami berharap dengan adanya profil digital ini, Kampung Tempe Bencongan semakin dikenal and para perajin semakin terbantu dalam pemasarannya," ujar perwakilan Karang Taruna.\n\nKegiatan peluncuran dihadiri oleh perangkat desa, tokoh masyarakat, dan para perajin tempe setempat.',
     penulis: 'Karang Taruna Bencongan',
     tanggal: '2026-08-01',
     kategori: 'Program Kerja',
-    coverUrl: null,
+    coverUrl: '/images/activity-tempe-1.svg',
   },
   {
     id: 'news-2',
@@ -130,7 +136,7 @@ export const newsList: NewsArticle[] = [
     penulis: 'Pengurus Karang Taruna',
     tanggal: '2026-07-18',
     kategori: 'Berita',
-    coverUrl: null,
+    coverUrl: '/images/umkm-tempe-2.svg',
   },
   {
     id: 'news-3',
@@ -142,7 +148,7 @@ export const newsList: NewsArticle[] = [
     penulis: 'Pengurus Karang Taruna',
     tanggal: '2026-06-25',
     kategori: 'Kegiatan',
-    coverUrl: null,
+    coverUrl: '/images/activity-tempe-2.svg',
   },
   {
     id: 'news-4',
@@ -154,14 +160,14 @@ export const newsList: NewsArticle[] = [
     penulis: 'Pengurus Karang Taruna',
     tanggal: '2026-05-30',
     kategori: 'Kegiatan',
-    coverUrl: null,
+    coverUrl: '/images/activity-tempe-1.svg',
   },
 ]
 
 export const galleryImages: GalleryImage[] = [
   {
     id: 'gal-1',
-    url: null,
+    url: '/images/activity-tempe-1.svg',
     caption: 'Peluncuran profil digital Kampung Mandiri',
     kategori: 'Kegiatan',
     tanggal: '2026-08-01',
@@ -169,7 +175,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-2',
-    url: null,
+    url: '/images/activity-tempe-2.svg',
     caption: 'Suasana produksi tempe pagi hari',
     kategori: 'Produksi',
     tanggal: '2026-07-20',
@@ -177,7 +183,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-3',
-    url: null,
+    url: '/images/activity-tempe-2.svg',
     caption: 'Perajin muda menerima pelatihan higienitas',
     kategori: 'Kegiatan',
     tanggal: '2026-06-25',
@@ -185,7 +191,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-4',
-    url: null,
+    url: '/images/activity-tempe-1.svg',
     caption: 'Gelar UMKM Sentra Tempe Bencongan',
     kategori: 'Kegiatan',
     tanggal: '2026-05-30',
@@ -193,7 +199,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-5',
-    url: null,
+    url: '/images/umkm-tempe-2.svg',
     caption: 'Tempe kedelai siap distribusi',
     kategori: 'Produksi',
     tanggal: '2026-07-12',
@@ -201,7 +207,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-6',
-    url: null,
+    url: '/images/hero-tempe.svg',
     caption: 'Pembinaan usaha oleh Karang Taruna',
     kategori: 'UMKM',
     tanggal: '2026-06-10',
@@ -209,7 +215,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-7',
-    url: null,
+    url: '/images/umkm-tempe-2.svg',
     caption: 'Penjemuran dan fermentasi tempe',
     kategori: 'Produksi',
     tanggal: '2026-05-15',
@@ -217,7 +223,7 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'gal-8',
-    url: null,
+    url: '/images/activity-tempe-2.svg',
     caption: 'Kunjungan perangkat desa ke sentra produksi',
     kategori: 'UMKM',
     tanggal: '2026-07-05',

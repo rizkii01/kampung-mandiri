@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { ArrowLeft, CalendarDays, PenLine } from 'lucide-react'
 import { api } from '../../lib/api'
 import Badge from '../../components/ui/Badge'
@@ -7,6 +8,7 @@ import Card from '../../components/ui/Card'
 import EmptyState from '../../components/ui/EmptyState'
 import Photo from '../../components/ui/Photo'
 import Spinner from '../../components/ui/Spinner'
+import { fadeUp } from '../../lib/motion'
 import { formatTanggal } from '../../lib/utils'
 
 export default function NewsDetailPage() {
@@ -28,7 +30,7 @@ export default function NewsDetailPage() {
           action={
             <Link
               to="/kegiatan"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-tempe-green-600 hover:text-tempe-green-700"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Kembali ke kegiatan
@@ -42,10 +44,15 @@ export default function NewsDetailPage() {
   const paragraf = news.konten.split('\n\n')
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8"
+    >
       <Link
         to="/kegiatan"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition-colors hover:text-emerald-600"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-stone-500 transition-colors hover:text-tempe-green-600"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Kembali ke kegiatan
@@ -53,17 +60,17 @@ export default function NewsDetailPage() {
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <Badge tone="green">{news.kategori}</Badge>
-        <span className="flex items-center gap-1.5 text-sm text-gray-500">
+        <span className="flex items-center gap-1.5 text-sm text-stone-500">
           <CalendarDays className="h-4 w-4" aria-hidden />
           {formatTanggal(news.tanggal)}
         </span>
-        <span className="flex items-center gap-1.5 text-sm text-gray-500">
+        <span className="flex items-center gap-1.5 text-sm text-stone-500">
           <PenLine className="h-4 w-4" aria-hidden />
           {news.penulis}
         </span>
       </div>
 
-      <h1 className="mt-4 text-2xl font-extrabold leading-tight text-gray-900 sm:text-3xl">
+      <h1 className="mt-4 text-2xl font-extrabold leading-tight text-stone-900 sm:text-3xl">
         {news.judul}
       </h1>
 
@@ -72,13 +79,13 @@ export default function NewsDetailPage() {
         <div className="p-8">
           <div className="space-y-4">
             {paragraf.map((paragrafItem, index) => (
-              <p key={index} className="leading-relaxed text-gray-600">
+              <p key={index} className="leading-relaxed text-stone-600">
                 {paragrafItem}
               </p>
             ))}
           </div>
         </div>
       </Card>
-    </article>
+    </motion.article>
   )
 }

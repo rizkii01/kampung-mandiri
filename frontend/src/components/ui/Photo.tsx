@@ -21,10 +21,10 @@ export default function Photo({ src, alt, ratio = 'aspect-video', className }: P
     <div
       className={cn(
         base,
-        'flex items-center justify-center bg-gradient-to-br from-emerald-50 via-gray-100 to-gray-50',
+        'flex items-center justify-center bg-gradient-to-br from-tempe-green-50 via-tempe-cream-50 to-tempe-gold-50',
       )}
     >
-      <ImageIcon className="h-8 w-8 text-emerald-300" aria-hidden />
+      <ImageIcon className="h-8 w-8 text-tempe-green-200" aria-hidden />
     </div>
   )
 }

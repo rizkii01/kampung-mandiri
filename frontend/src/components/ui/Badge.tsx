@@ -4,9 +4,9 @@ import { cn } from '../../lib/utils'
 type Tone = 'green' | 'gray' | 'amber'
 
 const tones: Record<Tone, string> = {
-  green: 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
-  gray: 'bg-gray-100 text-gray-600 ring-gray-500/20',
-  amber: 'bg-amber-50 text-amber-700 ring-amber-600/20',
+  green: 'bg-tempe-green-100/70 text-tempe-green-700 ring-tempe-green-600/25',
+  gray: 'bg-stone-100 text-stone-600 ring-stone-400/20',
+  amber: 'bg-tempe-gold-100/70 text-tempe-gold-700 ring-tempe-gold-600/25',
 }
 
 interface BadgeProps {
@@ -19,7 +19,8 @@ export default function Badge({ tone = 'gray', children, className }: BadgeProps
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset',
+        'inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset tracking-wide backdrop-blur-[2px]',
+        'shadow-sm shadow-stone-900/5',
         tones[tone],
         className,
       )}

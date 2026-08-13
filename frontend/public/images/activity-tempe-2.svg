@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Ilustrasi Umum Sentra Tempe">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf3e6"/>
+      <stop offset="1" stop-color="#eef6ef"/>
+    </linearGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7c14b"/>
+      <stop offset="1" stop-color="#e89f1f"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#45b070"/>
+      <stop offset="1" stop-color="#1f6e46"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="90" cy="80" r="150" fill="#cde8d8" opacity="0.6"/>
+  <circle cx="700" cy="440" r="150" fill="#f7e2b8" opacity="0.6"/>
+  <g transform="translate(250 130) rotate(3)">
+    <rect x="0" y="0" width="280" height="190" rx="30" fill="url(#slab)" opacity="0.4" transform="translate(0 26)"/>
+    <rect x="0" y="0" width="280" height="190" rx="30" fill="url(#slab)" opacity="0.65" transform="translate(7 13)"/>
+    <rect x="0" y="0" width="280" height="190" rx="30" fill="url(#slab)"/>
+    <g fill="#a06f12" opacity="0.5">
+      <ellipse cx="32" cy="38" rx="7" ry="11"/>
+      <ellipse cx="62" cy="38" rx="7" ry="11"/>
+      <ellipse cx="92" cy="38" rx="7" ry="11"/>
+      <ellipse cx="122" cy="38" rx="7" ry="11"/>
+      <ellipse cx="152" cy="38" rx="7" ry="11"/>
+      <ellipse cx="182" cy="38" rx="7" ry="11"/>
+      <ellipse cx="212" cy="38" rx="7" ry="11"/>
+      <ellipse cx="242" cy="38" rx="7" ry="11"/>
+      <ellipse cx="32" cy="70" rx="7" ry="11"/>
+      <ellipse cx="62" cy="70" rx="7" ry="11"/>
+      <ellipse cx="92" cy="70" rx="7" ry="11"/>
+      <ellipse cx="122" cy="70" rx="7" ry="11"/>
+      <ellipse cx="152" cy="70" rx="7" ry="11"/>
+      <ellipse cx="182" cy="70" rx="7" ry="11"/>
+      <ellipse cx="212" cy="70" rx="7" ry="11"/>
+      <ellipse cx="242" cy="70" rx="7" ry="11"/>
+      <ellipse cx="32" cy="102" rx="7" ry="11"/>
+      <ellipse cx="62" cy="102" rx="7" ry="11"/>
+      <ellipse cx="92" cy="102" rx="7" ry="11"/>
+      <ellipse cx="122" cy="102" rx="7" ry="11"/>
+      <ellipse cx="152" cy="102" rx="7" ry="11"/>
+      <ellipse cx="182" cy="102" rx="7" ry="11"/>
+      <ellipse cx="212" cy="102" rx="7" ry="11"/>
+      <ellipse cx="242" cy="102" rx="7" ry="11"/>
+      <ellipse cx="32" cy="134" rx="7" ry="11"/>
+      <ellipse cx="62" cy="134" rx="7" ry="11"/>
+      <ellipse cx="92" cy="134" rx="7" ry="11"/>
+      <ellipse cx="122" cy="134" rx="7" ry="11"/>
+      <ellipse cx="152" cy="134" rx="7" ry="11"/>
+      <ellipse cx="182" cy="134" rx="7" ry="11"/>
+      <ellipse cx="212" cy="134" rx="7" ry="11"/>
+      <ellipse cx="242" cy="134" rx="7" ry="11"/>
+      <ellipse cx="32" cy="166" rx="7" ry="11"/>
+      <ellipse cx="62" cy="166" rx="7" ry="11"/>
+      <ellipse cx="92" cy="166" rx="7" ry="11"/>
+      <ellipse cx="122" cy="166" rx="7" ry="11"/>
+      <ellipse cx="152" cy="166" rx="7" ry="11"/>
+      <ellipse cx="182" cy="166" rx="7" ry="11"/>
+      <ellipse cx="212" cy="166" rx="7" ry="11"/>
+      <ellipse cx="242" cy="166" rx="7" ry="11"/>
+    </g>
+    <rect x="0" y="0" width="280" height="190" rx="30" fill="none" stroke="#9c6a0e" stroke-width="3" opacity="0.28"/>
+  </g>
+  <g fill="url(#leaf)">
+    <path d="M620 210 c-22 -42 -70 -58 -110 -42 c20 42 66 62 110 42 Z" transform="rotate(-10 565 189)"/>
+  </g>
+  <g fill="#e8a020" stroke="#b97f12" stroke-width="2">
+    <ellipse cx="120" cy="420" rx="11" ry="15" transform="rotate(24 120 420)"/>
+    <ellipse cx="300" cy="440" rx="10" ry="14" transform="rotate(-18 300 440)"/>
+    <ellipse cx="620" cy="440" rx="10" ry="14" transform="rotate(32 620 440)"/>
+    <ellipse cx="660" cy="120" rx="10" ry="14" transform="rotate(-26 660 120)"/>
+  </g>
+</svg>

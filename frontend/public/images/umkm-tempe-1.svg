@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Ilustrasi UMKM Tempe">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef6ef"/>
+      <stop offset="1" stop-color="#fbf3e6"/>
+    </linearGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7c14b"/>
+      <stop offset="1" stop-color="#e89f1f"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#45b070"/>
+      <stop offset="1" stop-color="#1f6e46"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg)"/>
+  <circle cx="480" cy="80" r="150" fill="#cde8d8" opacity="0.6"/>
+  <circle cx="90" cy="390" r="140" fill="#f7e2b8" opacity="0.6"/>
+  <g transform="translate(150 140) rotate(4)">
+    <rect x="0" y="0" width="220" height="150" rx="26" fill="url(#slab)" opacity="0.4" transform="translate(0 22)"/>
+    <rect x="0" y="0" width="220" height="150" rx="26" fill="url(#slab)" opacity="0.65" transform="translate(6 11)"/>
+    <rect x="0" y="0" width="220" height="150" rx="26" fill="url(#slab)"/>
+    <g fill="#a06f12" opacity="0.5">
+      <ellipse cx="30" cy="32" rx="6" ry="10"/>
+      <ellipse cx="56" cy="32" rx="6" ry="10"/>
+      <ellipse cx="82" cy="32" rx="6" ry="10"/>
+      <ellipse cx="108" cy="32" rx="6" ry="10"/>
+      <ellipse cx="134" cy="32" rx="6" ry="10"/>
+      <ellipse cx="160" cy="32" rx="6" ry="10"/>
+      <ellipse cx="186" cy="32" rx="6" ry="10"/>
+      <ellipse cx="30" cy="60" rx="6" ry="10"/>
+      <ellipse cx="56" cy="60" rx="6" ry="10"/>
+      <ellipse cx="82" cy="60" rx="6" ry="10"/>
+      <ellipse cx="108" cy="60" rx="6" ry="10"/>
+      <ellipse cx="134" cy="60" rx="6" ry="10"/>
+      <ellipse cx="160" cy="60" rx="6" ry="10"/>
+      <ellipse cx="186" cy="60" rx="6" ry="10"/>
+      <ellipse cx="30" cy="88" rx="6" ry="10"/>
+      <ellipse cx="56" cy="88" rx="6" ry="10"/>
+      <ellipse cx="82" cy="88" rx="6" ry="10"/>
+      <ellipse cx="108" cy="88" rx="6" ry="10"/>
+      <ellipse cx="134" cy="88" rx="6" ry="10"/>
+      <ellipse cx="160" cy="88" rx="6" ry="10"/>
+      <ellipse cx="186" cy="88" rx="6" ry="10"/>
+      <ellipse cx="30" cy="116" rx="6" ry="10"/>
+      <ellipse cx="56" cy="116" rx="6" ry="10"/>
+      <ellipse cx="82" cy="116" rx="6" ry="10"/>
+      <ellipse cx="108" cy="116" rx="6" ry="10"/>
+      <ellipse cx="134" cy="116" rx="6" ry="10"/>
+      <ellipse cx="160" cy="116" rx="6" ry="10"/>
+      <ellipse cx="186" cy="116" rx="6" ry="10"/>
+    </g>
+    <rect x="0" y="0" width="220" height="150" rx="26" fill="none" stroke="#9c6a0e" stroke-width="3" opacity="0.28"/>
+  </g>
+  <g fill="url(#leaf)">
+    <path d="M430 130 c-20 -38 -62 -52 -98 -38 c18 38 58 56 98 38 Z" transform="rotate(-14 380 112)"/>
+  </g>
+  <g fill="#e8a020" stroke="#b97f12" stroke-width="2">
+    <ellipse cx="120" cy="360" rx="10" ry="14" transform="rotate(20 120 360)"/>
+    <ellipse cx="460" cy="350" rx="10" ry="14" transform="rotate(-24 460 350)"/>
+    <ellipse cx="420" cy="80" rx="9" ry="13" transform="rotate(38 420 80)"/>
+  </g>
+</svg>

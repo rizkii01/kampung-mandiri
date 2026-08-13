@@ -7,12 +7,16 @@ import Spinner from '../components/ui/Spinner'
 import {
   AdminDashboardPage,
   ContactPage,
+  GalleryAdminPage,
   LandingPage,
   LoginPage,
+  NewsAdminPage,
   NewsDetailPage,
   NewsListPage,
   NotFoundPage,
+  ProfileAdminPage,
   ProfilePage,
+  UmkmAdminPage,
   UmkmDetailPage,
   UmkmListPage,
 } from './lazyPages'
@@ -40,7 +44,13 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <AdminLayout />,
-        children: [{ path: '/admin', element: withSuspense(<AdminDashboardPage />) }],
+        children: [
+          { path: '/admin', element: withSuspense(<AdminDashboardPage />) },
+          { path: '/admin/profil', element: withSuspense(<ProfileAdminPage />) },
+          { path: '/admin/umkm', element: withSuspense(<UmkmAdminPage />) },
+          { path: '/admin/kegiatan', element: withSuspense(<NewsAdminPage />) },
+          { path: '/admin/galeri', element: withSuspense(<GalleryAdminPage />) },
+        ],
       },
     ],
   },

@@ -9,5 +9,52 @@ html {
 }
 
 body {
-  @apply bg-white text-gray-800 antialiased;
+  @apply bg-tempe-cream-100 text-stone-800 antialiased;
+}
+
+::selection {
+  @apply bg-tempe-green-600 text-white;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .pattern-grid {
+    background-image:
+      linear-gradient(to right, hsl(142 60% 20% / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(142 60% 20% / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(hsl(142 60% 20% / 0.07) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+
+  .bg-dots-gold {
+    background-image: radial-gradient(hsl(38 92% 50% / 0.14) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  .text-gold {
+    @apply bg-gradient-to-r from-tempe-gold-700 via-tempe-gold-500 to-tempe-gold-700 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply border border-white/40 bg-white/70 backdrop-blur-xl;
+  }
 }
