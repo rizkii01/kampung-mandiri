@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { Images, Info, LayoutDashboard, LogOut, Newspaper, Sprout, Store } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 import { cn } from '../../lib/utils'
+import Seo from '../Seo'
 
 const menu = [
   { to: '/admin', label: 'Dashboard', end: true, icon: LayoutDashboard },
@@ -16,6 +17,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Seo title="Panel Admin" noindex />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-gray-200 bg-white lg:flex">
         <div className="flex h-16 items-center gap-2.5 border-b border-gray-200 px-5">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">

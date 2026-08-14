@@ -10,6 +10,7 @@ import Photo from '../../components/ui/Photo'
 import Spinner from '../../components/ui/Spinner'
 import { fadeUp } from '../../lib/motion'
 import { formatTanggal } from '../../lib/utils'
+import Seo, { SITE_URL } from '../../components/Seo'
 
 export default function NewsDetailPage() {
   const { id = '' } = useParams()
@@ -43,6 +44,18 @@ export default function NewsDetailPage() {
 
   const paragraf = news.konten.split('\n\n')
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: news.judul,
+    description: news.ringkasan,
+    image: `${SITE_URL}${news.coverUrl}`,
+    datePublished: news.tanggal,
+    dateModified: news.tanggal,
+    author: { '@type': 'Organization', name: news.penulis },
+    publisher: { '@type': 'Organization', name: 'Karang Taruna Desa Bencongan' },
+  }
+
   return (
     <motion.article
       variants={fadeUp}
@@ -50,6 +63,14 @@ export default function NewsDetailPage() {
       animate="visible"
       className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8"
     >
+      <Seo
+        title={news.judul}
+        description={news.ringkasan}
+        type="article"
+        image={`${SITE_URL}${news.coverUrl}`}
+        keywords={`${news.kategori}, kegiatan karang taruna, kampung tempe bencongan`}
+        jsonLd={articleJsonLd}
+      />
       <Link
         to="/kegiatan"
         className="inline-flex items-center gap-2 text-sm font-semibold text-stone-500 transition-colors hover:text-tempe-green-600"

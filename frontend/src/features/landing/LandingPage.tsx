@@ -12,6 +12,7 @@ import SectionHeading from '../../components/ui/SectionHeading'
 import Spinner from '../../components/ui/Spinner'
 import AnimatedNumber from '../../components/ui/AnimatedNumber'
 import { formatTanggalPendek } from '../../lib/utils'
+import Seo, { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from '../../components/Seo'
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -33,6 +34,15 @@ const cardVariants: Variants = {
     y: 0,
     transition: { type: 'spring', stiffness: 100, damping: 15 },
   },
+}
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: DEFAULT_DESCRIPTION,
+  inLanguage: 'id',
 }
 
 export default function LandingPage() {
@@ -71,6 +81,7 @@ export default function LandingPage() {
 
   return (
     <div className="overflow-hidden">
+      <Seo jsonLd={websiteJsonLd} />
       {/* HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-tempe-cream-50 via-tempe-cream-100 to-tempe-green-50/20 pattern-grid pt-12 pb-24">
         {/* Glow ambient effects */}

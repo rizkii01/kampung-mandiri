@@ -8,6 +8,7 @@ import { ArrowLeft } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 import Button from '../../components/ui/Button'
 import { scaleIn } from '../../lib/motion'
+import Seo from '../../components/Seo'
 
 const schema = z.object({
   email: z.string().min(1, 'Email wajib diisi').email('Format email tidak valid'),
@@ -44,6 +45,7 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-tempe-green-800 via-tempe-green-900 to-tempe-green-950 px-4 py-10">
+      <Seo title="Masuk Admin" noindex />
       {/* Decorative background */}
       <div className="absolute inset-0 bg-dots-gold opacity-40" />
       <div className="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-tempe-green-500/20 blur-3xl animate-pulse-glow" />

@@ -9,6 +9,7 @@ import EmptyState from '../../components/ui/EmptyState'
 import Photo from '../../components/ui/Photo'
 import Spinner from '../../components/ui/Spinner'
 import { fadeUp } from '../../lib/motion'
+import Seo, { SITE_URL } from '../../components/Seo'
 
 export default function UmkmDetailPage() {
   const { id = '' } = useParams()
@@ -52,8 +53,35 @@ export default function UmkmDetailPage() {
     `Halo ${umkm.nama}, saya tertarik dengan produk tempe Anda.`,
   )}`
 
+  const umkmJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: umkm.nama,
+    description: umkm.deskripsi,
+    url: `${SITE_URL}/umkm/${umkm.id}`,
+    image: `${SITE_URL}${umkm.imageUrl}`,
+    telephone: umkm.noHp,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Klari',
+      addressRegion: 'Jawa Barat',
+      addressCountry: 'ID',
+    },
+    makesOffer: umkm.produk.map((produk) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Product', name: produk },
+    })),
+  }
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <Seo
+        title={umkm.nama}
+        description={`${umkm.nama} — ${umkm.deskripsi} Alamat: ${umkm.alamat}. Kontak: ${umkm.noHp}.`}
+        keywords={`${umkm.nama}, tempe bencongan, ${umkm.produk.join(', ')}, tempe karawang`}
+        image={`${SITE_URL}${umkm.imageUrl}`}
+        jsonLd={umkmJsonLd}
+      />
       <Link
         to="/umkm"
         className="inline-flex items-center gap-2 text-sm font-semibold text-stone-500 transition-colors hover:text-tempe-green-600"

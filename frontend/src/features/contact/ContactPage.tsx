@@ -8,6 +8,7 @@ import SectionHeading from '../../components/ui/SectionHeading'
 import Spinner from '../../components/ui/Spinner'
 import { containerStagger, itemStagger } from '../../lib/motion'
 import { siteProfile } from '../../data/mock'
+import Seo from '../../components/Seo'
 
 export default function ContactPage() {
   const { data: profile, isLoading } = useQuery({
@@ -28,6 +29,11 @@ export default function ContactPage() {
 
   return (
     <div>
+      <Seo
+        title="Kontak Kampung Tempe"
+        description={`Hubungi ${siteProfile.nama}, Bencongan, Klari, Karawang. Alamat: ${siteProfile.alamat}. Telepon: ${siteProfile.noHp}. Email: ${siteProfile.email}.`}
+        keywords="kontak karang taruna bencongan, alamat kampung tempe karawang, pesan tempe bencongan, sentra tempe klari"
+      />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
           <SectionHeading

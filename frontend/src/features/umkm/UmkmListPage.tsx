@@ -12,6 +12,7 @@ import SectionHeading from '../../components/ui/SectionHeading'
 import Spinner from '../../components/ui/Spinner'
 import { containerStagger, itemStagger } from '../../lib/motion'
 import { siteProfile } from '../../data/mock'
+import Seo from '../../components/Seo'
 
 export default function UmkmListPage() {
   const { data: umkm, isLoading } = useQuery({
@@ -34,6 +35,11 @@ export default function UmkmListPage() {
 
   return (
     <div>
+      <Seo
+        title="UMKM Perajin Tempe"
+        description={`Daftar unit usaha UMKM tempe di ${siteProfile.nama}, Klari, Karawang — profil produsen, produk, kapasitas produksi, dan kontak perajin tempe Bencongan.`}
+        keywords="umkm tempe, perajin tempe bencongan, produsen tempe karawang, tempe kedelai klari, jual tempe"
+      />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
           <SectionHeading

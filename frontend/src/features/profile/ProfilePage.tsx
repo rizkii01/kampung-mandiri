@@ -8,6 +8,7 @@ import Photo from '../../components/ui/Photo'
 import SectionHeading from '../../components/ui/SectionHeading'
 import Card from '../../components/ui/Card'
 import { siteProfile } from '../../data/mock'
+import Seo, { SITE_URL } from '../../components/Seo'
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -35,10 +36,36 @@ export default function ProfilePage() {
   const data = profile ?? siteProfile
   const sejarahParagraf = data.sejarah.split('\n\n')
 
+  const localBusinessJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: data.nama,
+    description: data.deskripsi,
+    url: `${SITE_URL}/profil`,
+    logo: `${SITE_URL}${data.logoUrl}`,
+    image: `${SITE_URL}${data.heroImageUrl}`,
+    telephone: data.noHp,
+    email: data.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Klari',
+      addressRegion: 'Jawa Barat',
+      addressCountry: 'ID',
+    },
+    openingHours: 'Mo-Su 06:00-18:00',
+  }
+
   if (isLoading) return <Spinner />
 
   return (
     <div className="overflow-hidden">
+      <Seo
+        title="Profil Kampung Tempe"
+        description={data.deskripsi}
+        keywords="kampung tempe bencongan, sentra tempe klari, sejarah tempe karawang, karang taruna bencongan"
+        image={`${SITE_URL}${data.heroImageUrl}`}
+        jsonLd={localBusinessJsonLd}
+      />
       {/* Header Profile Section */}
       <section className="relative bg-gradient-to-br from-tempe-cream-50 via-tempe-cream-100 to-tempe-green-50/20 pt-16 pb-20 border-b border-stone-250/20 pattern-grid">
         <div className="absolute top-0 right-0 h-80 w-80 rounded-full bg-tempe-green-600/5 blur-3xl animate-pulse-glow" />

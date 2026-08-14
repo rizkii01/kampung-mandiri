@@ -13,6 +13,7 @@ import Spinner from '../../components/ui/Spinner'
 import { containerStagger, itemStagger } from '../../lib/motion'
 import { formatTanggalPendek } from '../../lib/utils'
 import type { GalleryImage } from '../../types/models'
+import Seo from '../../components/Seo'
 
 type Tab = 'berita' | 'galeri'
 
@@ -35,6 +36,11 @@ export default function NewsListPage() {
 
   return (
     <div>
+      <Seo
+        title="Kegiatan & Program Kerja"
+        description="Berita dan dokumentasi kegiatan Karang Taruna Kampung Mandiri Sentra Tempe Bencongan, Klari, Karawang — pelatihan, pembinaan UMKM, hingga galeri foto kampung tempe."
+        keywords="kegiatan karang taruna, berita kampung tempe, program kerja kampung mandiri, galeri foto bencongan"
+      />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
           <SectionHeading
