@@ -15,7 +15,7 @@ app.use(
     origin: corsOrigins && corsOrigins.length > 0 ? corsOrigins : true,
   }),
 )
-app.use(express.json())
+app.use(express.json({ limit: '8mb' }))
 
 app.get('/api/health', (_req, res) => res.json({ ok: true }))
 

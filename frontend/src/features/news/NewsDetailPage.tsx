@@ -10,7 +10,8 @@ import Photo from '../../components/ui/Photo'
 import Spinner from '../../components/ui/Spinner'
 import { fadeUp } from '../../lib/motion'
 import { formatTanggal } from '../../lib/utils'
-import Seo, { SITE_URL } from '../../components/Seo'
+import Seo from '../../components/Seo'
+import { resolveImageUrl } from '../../lib/utils'
 
 export default function NewsDetailPage() {
   const { id = '' } = useParams()
@@ -49,7 +50,7 @@ export default function NewsDetailPage() {
     '@type': 'NewsArticle',
     headline: news.judul,
     description: news.ringkasan,
-    image: `${SITE_URL}${news.coverUrl}`,
+    image: resolveImageUrl(news.coverUrl),
     datePublished: news.tanggal,
     dateModified: news.tanggal,
     author: { '@type': 'Organization', name: news.penulis },
@@ -67,7 +68,7 @@ export default function NewsDetailPage() {
         title={news.judul}
         description={news.ringkasan}
         type="article"
-        image={`${SITE_URL}${news.coverUrl}`}
+        image={resolveImageUrl(news.coverUrl)}
         keywords={`${news.kategori}, kegiatan karang taruna, kampung tempe bencongan`}
         jsonLd={articleJsonLd}
       />

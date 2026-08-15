@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Save } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -12,6 +12,7 @@ import Input from '../../components/ui/Input'
 import PageHeader from '../../components/admin/PageHeader'
 import Spinner from '../../components/ui/Spinner'
 import Textarea from '../../components/ui/Textarea'
+import ImageUpload from '../../components/admin/ImageUpload'
 
 export default function ProfileAdminPage() {
   const queryClient = useQueryClient()
@@ -25,8 +26,13 @@ export default function ProfileAdminPage() {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ProfileFormValues>({ resolver: zodResolver(profileSchema) })
+
+  const heroImageUrl = useWatch({ control, name: 'heroImageUrl' })
+  const logoUrl = useWatch({ control, name: 'logoUrl' })
 
   useEffect(() => {
     if (profile) {
@@ -42,6 +48,8 @@ export default function ProfileAdminPage() {
         email: profile.email,
         jamOperasional: profile.jamOperasional,
         instagram: profile.instagram ?? '',
+        heroImageUrl: profile.heroImageUrl ?? '',
+        logoUrl: profile.logoUrl ?? '',
       })
     }
   }, [profile, reset])
@@ -100,6 +108,26 @@ export default function ProfileAdminPage() {
                 {...register('misi')}
               />
             </div>
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500">Foto</h2>
+          <div className="mt-4 grid gap-6 sm:grid-cols-2">
+            <ImageUpload
+              label="Gambar Hero (halaman depan)"
+              value={heroImageUrl ?? ''}
+              onChange={(v) => setValue('heroImageUrl', v, { shouldDirty: true })}
+              ratio="aspect-[4/3]"
+              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
+            <ImageUpload
+              label="Logo Kampung"
+              value={logoUrl ?? ''}
+              onChange={(v) => setValue('logoUrl', v, { shouldDirty: true })}
+              ratio="aspect-square"
+              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
           </div>
         </Card>
 

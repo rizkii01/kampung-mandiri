@@ -10,6 +10,7 @@ export const umkmSchema = z.object({
   status: z.enum(['AKTIF', 'NONAKTIF']),
   produk: z.string().min(1, 'Pisahkan produk dengan tanda koma'),
   bergabungSejak: z.string().min(1, 'Bergabung sejak wajib diisi'),
+  imageUrl: z.string().optional(),
 })
 
 export type UmkmFormValues = z.infer<typeof umkmSchema>
@@ -47,6 +48,8 @@ export const profileSchema = z.object({
   email: z.string().email('Format email tidak valid'),
   jamOperasional: z.string().min(1, 'Jam operasional wajib diisi'),
   instagram: z.string().optional(),
+  heroImageUrl: z.string().optional(),
+  logoUrl: z.string().optional(),
 })
 
 export type ProfileFormValues = z.infer<typeof profileSchema>

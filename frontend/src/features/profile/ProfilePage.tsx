@@ -8,6 +8,7 @@ import SectionHeading from '../../components/ui/SectionHeading'
 import Card from '../../components/ui/Card'
 import { siteProfile } from '../../data/mock'
 import Seo, { SITE_URL } from '../../components/Seo'
+import { resolveImageUrl } from '../../lib/utils'
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -41,8 +42,8 @@ export default function ProfilePage() {
     name: data.nama,
     description: data.deskripsi,
     url: `${SITE_URL}/profil`,
-    logo: `${SITE_URL}${data.logoUrl}`,
-    image: `${SITE_URL}${data.heroImageUrl}`,
+    logo: resolveImageUrl(data.logoUrl),
+    image: resolveImageUrl(data.heroImageUrl),
     telephone: data.noHp,
     email: data.email,
     address: {
@@ -60,7 +61,7 @@ export default function ProfilePage() {
         title="Profil Kampung Tempe"
         description={data.deskripsi}
         keywords="kampung tempe bencongan, sentra tempe kelapa dua, sejarah tempe tangerang, karang taruna bencongan"
-        image={`${SITE_URL}${data.heroImageUrl}`}
+        image={resolveImageUrl(data.heroImageUrl)}
         jsonLd={localBusinessJsonLd}
       />
       {/* Header Profile Section */}

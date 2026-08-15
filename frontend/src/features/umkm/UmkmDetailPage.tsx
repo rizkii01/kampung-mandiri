@@ -10,6 +10,7 @@ import Photo from '../../components/ui/Photo'
 import Spinner from '../../components/ui/Spinner'
 import { fadeUp } from '../../lib/motion'
 import Seo, { SITE_URL } from '../../components/Seo'
+import { resolveImageUrl } from '../../lib/utils'
 
 export default function UmkmDetailPage() {
   const { id = '' } = useParams()
@@ -59,7 +60,7 @@ export default function UmkmDetailPage() {
     name: umkm.nama,
     description: umkm.deskripsi,
     url: `${SITE_URL}/umkm/${umkm.id}`,
-    image: `${SITE_URL}${umkm.imageUrl}`,
+    image: resolveImageUrl(umkm.imageUrl),
     telephone: umkm.noHp,
     address: {
       '@type': 'PostalAddress',
@@ -79,7 +80,7 @@ export default function UmkmDetailPage() {
         title={umkm.nama}
         description={`${umkm.nama} — ${umkm.deskripsi} Alamat: ${umkm.alamat}. Kontak: ${umkm.noHp}.`}
         keywords={`${umkm.nama}, tempe bencongan, ${umkm.produk.join(', ')}, tempe tangerang`}
-        image={`${SITE_URL}${umkm.imageUrl}`}
+        image={resolveImageUrl(umkm.imageUrl)}
         jsonLd={umkmJsonLd}
       />
       <Link

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil, Plus, Trash2 } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -18,6 +18,7 @@ import PageHeader from '../../components/admin/PageHeader'
 import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
 import Textarea from '../../components/ui/Textarea'
+import ImageUpload from '../../components/admin/ImageUpload'
 
 export default function UmkmAdminPage() {
   const queryClient = useQueryClient()
@@ -32,8 +33,12 @@ export default function UmkmAdminPage() {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<UmkmFormValues>({ resolver: zodResolver(umkmSchema) })
+
+  const imageUrl = useWatch({ control, name: 'imageUrl' })
 
   const showNotice = (text: string) => {
     setNotice({ type: 'success', text })
@@ -52,6 +57,7 @@ export default function UmkmAdminPage() {
       status: 'AKTIF',
       produk: '',
       bergabungSejak: '',
+      imageUrl: '',
     })
     setModalOpen(true)
   }
@@ -68,6 +74,7 @@ export default function UmkmAdminPage() {
       status: umkm.status,
       produk: umkm.produk.join(', '),
       bergabungSejak: umkm.bergabungSejak,
+      imageUrl: umkm.imageUrl ?? '',
     })
     setModalOpen(true)
   }
@@ -77,7 +84,7 @@ export default function UmkmAdminPage() {
     const payload = {
       ...values,
       produk: values.produk.split(',').map((p) => p.trim()).filter(Boolean),
-      imageUrl: null,
+      imageUrl: values.imageUrl?.trim() || null,
     }
     if (editing) {
       await api.updateUmkm(editing.id, payload)
@@ -209,6 +216,15 @@ export default function UmkmAdminPage() {
           />
           <Input label="Produk (pisahkan dengan koma)" placeholder="Tempe Kedelai, Tempe Gembus" error={errors.produk?.message} {...register('produk')} />
           <Input label="Bergabung Sejak" placeholder="Januari 2024" error={errors.bergabungSejak?.message} {...register('bergabungSejak')} />
+          <div className="sm:col-span-2">
+            <ImageUpload
+              label="Foto Produk (opsional)"
+              value={imageUrl ?? ''}
+              onChange={(v) => setValue('imageUrl', v, { shouldDirty: true })}
+              ratio="aspect-[4/3]"
+              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
+          </div>
           <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
               Batal

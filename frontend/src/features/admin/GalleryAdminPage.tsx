@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil, Plus, Trash2 } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -18,6 +18,7 @@ import PageHeader from '../../components/admin/PageHeader'
 import Photo from '../../components/ui/Photo'
 import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
+import ImageUpload from '../../components/admin/ImageUpload'
 import { formatTanggalPendek } from '../../lib/utils'
 
 const kategoriOptions = [
@@ -39,8 +40,12 @@ export default function GalleryAdminPage() {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<GalleryFormValues>({ resolver: zodResolver(gallerySchema) })
+
+  const url = useWatch({ control, name: 'url' })
 
   const showNotice = (text: string) => {
     setNotice({ type: 'success', text })
@@ -179,7 +184,13 @@ export default function GalleryAdminPage() {
           />
           <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
           <div className="sm:col-span-2">
-            <Input label="URL Foto (opsional)" placeholder="https://..." error={errors.url?.message} {...register('url')} />
+            <ImageUpload
+              label="Foto (opsional)"
+              value={url ?? ''}
+              onChange={(v) => setValue('url', v, { shouldDirty: true })}
+              ratio="aspect-square"
+              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
           </div>
           <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>

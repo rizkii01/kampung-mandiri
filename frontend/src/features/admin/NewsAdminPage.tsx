@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil, Plus, Trash2 } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -18,6 +18,7 @@ import PageHeader from '../../components/admin/PageHeader'
 import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
 import Textarea from '../../components/ui/Textarea'
+import ImageUpload from '../../components/admin/ImageUpload'
 import { formatTanggal } from '../../lib/utils'
 
 const kategoriOptions = [
@@ -39,8 +40,12 @@ export default function NewsAdminPage() {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<NewsFormValues>({ resolver: zodResolver(newsSchema) })
+
+  const coverUrl = useWatch({ control, name: 'coverUrl' })
 
   const showNotice = (text: string) => {
     setNotice({ type: 'success', text })
@@ -187,7 +192,15 @@ export default function NewsAdminPage() {
           />
           <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
           <Input label="Penulis" error={errors.penulis?.message} {...register('penulis')} />
-          <Input label="URL Foto Sampul (opsional)" placeholder="https://..." error={errors.coverUrl?.message} {...register('coverUrl')} />
+          <div className="sm:col-span-2">
+            <ImageUpload
+              label="Foto Sampul (opsional)"
+              value={coverUrl ?? ''}
+              onChange={(v) => setValue('coverUrl', v, { shouldDirty: true })}
+              ratio="aspect-video"
+              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
+          </div>
           <div className="sm:col-span-2">
             <Textarea label="Ringkasan" rows={3} error={errors.ringkasan?.message} {...register('ringkasan')} />
           </div>
