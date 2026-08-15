@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model SiteProfile {
+  id             String  @id
+  nama           String
+  tagline        String
+  deskripsi      String
+  sejarah        String
+  visi           String
+  misi           String
+  alamat         String
+  noHp           String
+  email          String
+  jamOperasional String
+  instagram      String?
+  heroImageUrl   String?
+  logoUrl        String?
+}
+
+model Umkm {
+  id             String   @id
+  nama           String
+  pemilik        String
+  deskripsi      String
+  alamat         String
+  noHp           String
+  kapasitas      String
+  status         String
+  produk         String
+  bergabungSejak String
+  imageUrl       String?
+  createdAt      DateTime @default(now())
+}
+
+model News {
+  id        String   @id
+  judul     String
+  ringkasan String
+  konten    String
+  penulis   String
+  tanggal   String
+  kategori  String
+  coverUrl  String?
+  createdAt DateTime @default(now())
+}
+
+model Gallery {
+  id        String   @id
+  url       String?
+  caption   String
+  kategori  String
+  tanggal   String
+  articleId String?
+  createdAt DateTime @default(now())
+}

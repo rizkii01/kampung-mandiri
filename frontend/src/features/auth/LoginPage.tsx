@@ -130,10 +130,6 @@ export default function LoginPage() {
                 {isSubmitting ? 'Memproses...' : 'Masuk'}
               </Button>
             </form>
-
-            <p className="mt-6 rounded-lg bg-white/60 px-3 py-2.5 text-center text-xs text-stone-500">
-              Mode pengembangan: kombinasi email & password apa pun dapat digunakan untuk login.
-            </p>
           </div>
         </motion.div>
       </div>
