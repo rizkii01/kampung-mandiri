@@ -1,11 +1,11 @@
 import express from 'express'
 import type { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
-import authRouter from './routes/auth'
-import profileRouter from './routes/profile'
-import umkmRouter from './routes/umkm'
-import newsRouter from './routes/news'
-import galleryRouter from './routes/gallery'
+import authRouter from './routes/auth.js'
+import profileRouter from './routes/profile.js'
+import umkmRouter from './routes/umkm.js'
+import newsRouter from './routes/news.js'
+import galleryRouter from './routes/gallery.js'
 
 const app = express()
 

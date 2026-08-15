@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import prisma from '../lib/prisma'
-import { requireAuth, type AuthedRequest } from '../middleware/auth'
-import { wrap } from '../lib/http'
+import prisma from '../lib/prisma.js'
+import { requireAuth, type AuthedRequest } from '../middleware/auth.js'
+import { wrap } from '../lib/http.js'
 
 const router = Router()
 
