@@ -79,9 +79,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Auth Buttons */}
+        {/* Auth Buttons (only visible when logged in) */}
         <div className="hidden items-center gap-3 md:flex">
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <>
               <Link to="/admin">
                 <Button variant="secondary" size="sm">
@@ -93,10 +93,6 @@ export default function Navbar() {
                 Keluar
               </Button>
             </>
-          ) : (
-            <Link to="/login">
-              <Button size="sm" className="shadow-none">Login Admin</Button>
-            </Link>
           )}
         </div>
 
@@ -153,7 +149,7 @@ export default function Navbar() {
               transition={{ delay: 0.25 }}
               className="mt-4 border-t border-stone-100 pt-4"
             >
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <div className="flex gap-2">
                   <Link to="/admin" onClick={closeMenu} className="flex-1">
                     <Button variant="secondary" className="w-full">
@@ -164,10 +160,6 @@ export default function Navbar() {
                     Keluar
                   </Button>
                 </div>
-              ) : (
-                <Link to="/login" onClick={closeMenu}>
-                  <Button className="w-full">Login Admin</Button>
-                </Link>
               )}
             </motion.div>
           </motion.div>
