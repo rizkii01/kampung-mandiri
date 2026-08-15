@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { ArrowRight, Flame, Images, Sprout, Users, Check, Sparkles } from 'lucide-react'
+import { ArrowRight, Flame, Images, Info, Sprout, Users, Check, Sparkles } from 'lucide-react'
 import { api } from '../../lib/api'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
@@ -113,6 +113,13 @@ export default function LandingPage() {
           transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut', delay: 2 }}
           className="absolute right-[24%] bottom-[12%] hidden h-5 w-5 rounded-full bg-gradient-to-br from-tempe-green-400 to-tempe-green-700/80 lg:block"
         />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 mb-10">
+          <div className="inline-flex flex-wrap items-center gap-2 rounded-2xl border border-tempe-green-200 bg-white/85 px-4 py-2.5 text-xs font-semibold text-tempe-green-800 shadow-sm backdrop-blur">
+            <Info className="h-4 w-4 shrink-0 text-tempe-green-600" aria-hidden />
+            Kampung Mandiri Sentra Tempe ini hanya ada di RW 01 Kelurahan Bencongan (9 RT) &mdash; website dikhususkan untuk wilayah RW 01, Kelapa Dua, Kabupaten Tangerang, Banten.
+          </div>
+        </div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
