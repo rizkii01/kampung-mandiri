@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Outlet, useLocation } from 'react-router-dom'
+import { useLocation, useOutlet } from 'react-router-dom'
 
 export default function PageTransition() {
   const { pathname } = useLocation()
+  const element = useOutlet()
 
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -13,7 +14,7 @@ export default function PageTransition() {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <Outlet />
+        {element}
       </motion.div>
     </AnimatePresence>
   )

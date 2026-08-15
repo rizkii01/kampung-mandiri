@@ -5,13 +5,12 @@ import { api } from '../../lib/api'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import SectionHeading from '../../components/ui/SectionHeading'
-import Spinner from '../../components/ui/Spinner'
 import { containerStagger, itemStagger } from '../../lib/motion'
 import { siteProfile } from '../../data/mock'
 import Seo from '../../components/Seo'
 
 export default function ContactPage() {
-  const { data: profile, isLoading } = useQuery({
+  const { data: profile } = useQuery({
     queryKey: ['site-profile'],
     queryFn: api.getSiteProfile,
   })
@@ -24,8 +23,6 @@ export default function ContactPage() {
     { icon: Mail, title: 'Email', value: data.email },
     { icon: Clock, title: 'Jam Operasional', value: data.jamOperasional },
   ]
-
-  if (isLoading) return <Spinner />
 
   return (
     <div>

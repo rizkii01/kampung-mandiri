@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { CheckCircle2, History, Target, ShieldCheck, Sprout } from 'lucide-react'
 import { api } from '../../lib/api'
-import Spinner from '../../components/ui/Spinner'
 import Photo from '../../components/ui/Photo'
 import SectionHeading from '../../components/ui/SectionHeading'
 import Card from '../../components/ui/Card'
@@ -28,7 +27,7 @@ const itemVariants: Variants = {
 }
 
 export default function ProfilePage() {
-  const { data: profile, isLoading } = useQuery({
+  const { data: profile } = useQuery({
     queryKey: ['site-profile'],
     queryFn: api.getSiteProfile,
   })
@@ -54,8 +53,6 @@ export default function ProfilePage() {
     },
     openingHours: 'Mo-Su 06:00-18:00',
   }
-
-  if (isLoading) return <Spinner />
 
   return (
     <div className="overflow-hidden">

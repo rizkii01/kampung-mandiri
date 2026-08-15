@@ -22,7 +22,15 @@ import {
 } from './lazyPages'
 
 const withSuspense = (element: React.ReactNode) => (
-  <Suspense fallback={<Spinner />}>{element}</Suspense>
+  <Suspense
+    fallback={
+      <div className="flex min-h-[55vh] items-center justify-center py-10">
+        <Spinner />
+      </div>
+    }
+  >
+    {element}
+  </Suspense>
 )
 
 export const router = createBrowserRouter([

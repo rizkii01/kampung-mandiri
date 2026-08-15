@@ -1,12 +1,13 @@
 import { lazy } from 'react'
 
-export const LandingPage = lazy(() => import('../features/landing/LandingPage'))
-export const ProfilePage = lazy(() => import('../features/profile/ProfilePage'))
-export const UmkmListPage = lazy(() => import('../features/umkm/UmkmListPage'))
-export const UmkmDetailPage = lazy(() => import('../features/umkm/UmkmDetailPage'))
-export const NewsListPage = lazy(() => import('../features/news/NewsListPage'))
-export const NewsDetailPage = lazy(() => import('../features/news/NewsDetailPage'))
-export const ContactPage = lazy(() => import('../features/contact/ContactPage'))
+export { default as LandingPage } from '../features/landing/LandingPage'
+export { default as ProfilePage } from '../features/profile/ProfilePage'
+export { default as UmkmListPage } from '../features/umkm/UmkmListPage'
+export { default as UmkmDetailPage } from '../features/umkm/UmkmDetailPage'
+export { default as NewsListPage } from '../features/news/NewsListPage'
+export { default as NewsDetailPage } from '../features/news/NewsDetailPage'
+export { default as ContactPage } from '../features/contact/ContactPage'
+
 export const LoginPage = lazy(() => import('../features/auth/LoginPage'))
 export const AdminDashboardPage = lazy(() => import('../features/admin/AdminDashboardPage'))
 export const ProfileAdminPage = lazy(() => import('../features/admin/ProfileAdminPage'))
