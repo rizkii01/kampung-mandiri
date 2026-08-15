@@ -37,7 +37,7 @@ export default function UmkmListPage() {
     <div>
       <Seo
         title="UMKM Perajin Tempe"
-        description={`Daftar unit usaha UMKM tempe di ${siteProfile.nama}, Klari, Karawang — profil produsen, produk, kapasitas produksi, dan kontak perajin tempe Bencongan.`}
+        description={`Daftar unit usaha UMKM tempe di ${siteProfile.nama}, Kelapa Dua, Tangerang — profil produsen, produk, kapasitas produksi, dan kontak perajin tempe Bencongan.`}
         keywords="umkm tempe, perajin tempe bencongan, produsen tempe karawang, tempe kedelai klari, jual tempe"
       />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">

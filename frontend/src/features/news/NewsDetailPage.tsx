@@ -53,7 +53,7 @@ export default function NewsDetailPage() {
     datePublished: news.tanggal,
     dateModified: news.tanggal,
     author: { '@type': 'Organization', name: news.penulis },
-    publisher: { '@type': 'Organization', name: 'Karang Taruna Desa Bencongan' },
+    publisher: { '@type': 'Organization', name: 'Karang Taruna Kelurahan Bencongan' },
   }
 
   return (

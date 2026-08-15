@@ -140,7 +140,7 @@ export default function LandingPage() {
               </h1>
               
               <p className="mt-6 text-lg font-medium text-tempe-green-800/90 leading-relaxed max-w-lg">
-                {profile?.tagline ?? 'Digitalisasi UMKM Perajin Tempe Desa Bencongan'}
+                {profile?.tagline ?? 'Digitalisasi UMKM Perajin Tempe Kelurahan Bencongan'}
               </p>
               
               <p className="mt-4 leading-relaxed text-stone-600 max-w-xl">
@@ -404,7 +404,7 @@ export default function LandingPage() {
                 </h2>
                 
                 <p className="mt-4 leading-relaxed text-stone-200 max-w-xl">
-                  Kami memfasilitasi kerja sama pasokan rutin untuk katering, pasar induk, reseller, warung makan, hingga studi wisata edukasi pembuatan tempe di Desa Bencongan.
+                  Kami memfasilitasi kerja sama pasokan rutin untuk katering, pasar induk, reseller, warung makan, hingga studi wisata edukasi pembuatan tempe di Kelurahan Bencongan.
                 </p>
                 
                 <div className="mt-8 flex flex-wrap gap-4">

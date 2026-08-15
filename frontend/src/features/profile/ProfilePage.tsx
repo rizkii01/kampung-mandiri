@@ -47,8 +47,8 @@ export default function ProfilePage() {
     email: data.email,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Klari',
-      addressRegion: 'Jawa Barat',
+      addressLocality: 'Kelapa Dua',
+      addressRegion: 'Banten',
       addressCountry: 'ID',
     },
     openingHours: 'Mo-Su 06:00-18:00',
@@ -59,7 +59,7 @@ export default function ProfilePage() {
       <Seo
         title="Profil Kampung Tempe"
         description={data.deskripsi}
-        keywords="kampung tempe bencongan, sentra tempe klari, sejarah tempe karawang, karang taruna bencongan"
+        keywords="kampung tempe bencongan, sentra tempe kelapa dua, sejarah tempe tangerang, karang taruna bencongan"
         image={`${SITE_URL}${data.heroImageUrl}`}
         jsonLd={localBusinessJsonLd}
       />

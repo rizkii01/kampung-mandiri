@@ -63,8 +63,8 @@ export default function UmkmDetailPage() {
     telephone: umkm.noHp,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Klari',
-      addressRegion: 'Jawa Barat',
+      addressLocality: 'Kelapa Dua',
+      addressRegion: 'Banten',
       addressCountry: 'ID',
     },
     makesOffer: umkm.produk.map((produk) => ({
@@ -78,7 +78,7 @@ export default function UmkmDetailPage() {
       <Seo
         title={umkm.nama}
         description={`${umkm.nama} — ${umkm.deskripsi} Alamat: ${umkm.alamat}. Kontak: ${umkm.noHp}.`}
-        keywords={`${umkm.nama}, tempe bencongan, ${umkm.produk.join(', ')}, tempe karawang`}
+        keywords={`${umkm.nama}, tempe bencongan, ${umkm.produk.join(', ')}, tempe tangerang`}
         image={`${SITE_URL}${umkm.imageUrl}`}
         jsonLd={umkmJsonLd}
       />

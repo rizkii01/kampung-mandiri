@@ -38,7 +38,7 @@ export default function NewsListPage() {
     <div>
       <Seo
         title="Kegiatan & Program Kerja"
-        description="Berita dan dokumentasi kegiatan Karang Taruna Kampung Mandiri Sentra Tempe Bencongan, Klari, Karawang — pelatihan, pembinaan UMKM, hingga galeri foto kampung tempe."
+        description="Berita dan dokumentasi kegiatan Karang Taruna Kampung Mandiri Sentra Tempe Kelurahan Bencongan, Kelapa Dua, Tangerang — pelatihan, pembinaan UMKM, hingga galeri foto kampung tempe."
         keywords="kegiatan karang taruna, berita kampung tempe, program kerja kampung mandiri, galeri foto bencongan"
       />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">
