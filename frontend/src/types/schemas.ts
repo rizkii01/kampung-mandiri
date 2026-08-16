@@ -49,6 +49,7 @@ export const profileSchema = z.object({
   jamOperasional: z.string().min(1, 'Jam operasional wajib diisi'),
   instagram: z.string().optional(),
   heroImageUrl: z.string().optional(),
+  heroImages: z.array(z.string()).max(3).optional(),
   logoUrl: z.string().optional(),
 })
 

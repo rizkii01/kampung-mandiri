@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { CheckCircle2, History, Target, ShieldCheck, Sprout } from 'lucide-react'
 import { api } from '../../lib/api'
-import Photo from '../../components/ui/Photo'
+import HeroSlider from '../../components/ui/HeroSlider'
 import SectionHeading from '../../components/ui/SectionHeading'
 import Card from '../../components/ui/Card'
 import { siteProfile } from '../../data/mock'
@@ -35,6 +35,7 @@ export default function ProfilePage() {
 
   const data = profile ?? siteProfile
   const sejarahParagraf = data.sejarah.split('\n\n')
+  const heroImages = data.heroImages?.length ? data.heroImages : data.heroImageUrl ? [data.heroImageUrl] : []
 
   const localBusinessJsonLd = {
     '@context': 'https://schema.org',
@@ -93,8 +94,8 @@ export default function ProfilePage() {
           className="space-y-12"
         >
           <motion.div variants={itemVariants} className="relative overflow-hidden rounded-[2rem] p-2 bg-white shadow-card-hover border border-stone-200/50">
-            <Photo
-              src={data.heroImageUrl}
+            <HeroSlider
+              images={heroImages}
               alt={data.nama}
               ratio="aspect-video"
               className="rounded-[1.8rem]"

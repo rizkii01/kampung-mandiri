@@ -8,6 +8,7 @@ import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import Badge from '../../components/ui/Badge'
 import Photo from '../../components/ui/Photo'
+import HeroSlider from '../../components/ui/HeroSlider'
 import SectionHeading from '../../components/ui/SectionHeading'
 import Spinner from '../../components/ui/Spinner'
 import AnimatedNumber from '../../components/ui/AnimatedNumber'
@@ -66,6 +67,7 @@ export default function LandingPage() {
   const umkmAktif = umkm?.filter((item) => item.status === 'AKTIF') ?? []
   const umkmPreview = umkmAktif.slice(0, 3)
   const newsPreview = news?.slice(0, 3) ?? []
+  const heroImages = profile?.heroImages?.length ? profile.heroImages : profile?.heroImageUrl ? [profile.heroImageUrl] : []
 
   const totalKapasitas = umkmAktif.reduce((acc, item) => {
     const match = item.kapasitas.match(/\d+/)
@@ -173,8 +175,8 @@ export default function LandingPage() {
               {/* Photo Frame Styling */}
               <div className="relative w-full max-w-lg overflow-hidden rounded-[2.5rem] bg-stone-100 p-3 shadow-card-hover ring-1 ring-stone-900/5 group">
                 <div className="absolute inset-0 bg-gradient-to-tr from-tempe-green-900/20 via-transparent to-tempe-gold-500/10 pointer-events-none z-10 rounded-[2.2rem]" />
-                <Photo
-                  src={profile?.heroImageUrl}
+                <HeroSlider
+                  images={heroImages}
                   alt="Sentra Tempe Bencongan"
                   ratio="aspect-[4/3]"
                   className="rounded-[2.2rem] transition-transform duration-700 group-hover:scale-105"
@@ -424,7 +426,7 @@ export default function LandingPage() {
               <div className="hidden lg:block relative p-2">
                 <div className="absolute inset-0 bg-gradient-to-tr from-tempe-green-950/40 to-transparent z-10 rounded-[1.5rem]" />
                 <Photo
-                  src={profile?.heroImageUrl}
+                  src={heroImages[0] ?? profile?.heroImageUrl}
                   alt="Kemitraan Sentra Tempe"
                   ratio="aspect-video"
                   className="rounded-[1.5rem] shadow-lg border border-white/10"

@@ -26,6 +26,7 @@ const siteProfile = {
   jamOperasional: 'Senin – Minggu, 06.00 – 18.00 WIB',
   instagram: '@sentratempebencongan',
   heroImageUrl: '/images/hero-tempe.svg',
+  heroImages: ['/images/hero-tempe.svg'],
   logoUrl: '/favicon.svg',
 }
 

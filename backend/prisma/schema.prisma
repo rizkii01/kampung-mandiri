@@ -29,6 +29,7 @@ model SiteProfile {
   jamOperasional String
   instagram      String?
   heroImageUrl   String?
+  heroImages     String[] @default([])
   logoUrl        String?
 }
 

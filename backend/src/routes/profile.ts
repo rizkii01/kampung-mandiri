@@ -25,6 +25,7 @@ const toProfile = (profile: SiteProfile) => ({
   jamOperasional: profile.jamOperasional,
   instagram: profile.instagram,
   heroImageUrl: profile.heroImageUrl,
+  heroImages: profile.heroImages,
   logoUrl: profile.logoUrl,
 })
 
@@ -45,6 +46,9 @@ router.patch(
     const data: Record<string, unknown> = { ...body }
     if (Array.isArray(body.misi)) data.misi = (body.misi as string[]).map((m) => m.trim()).filter(Boolean).join('\n')
     else delete data.misi
+
+    if (Array.isArray(body.heroImages)) data.heroImages = (body.heroImages as string[]).filter(Boolean).slice(0, 3)
+    else delete data.heroImages
 
     const profile = await prisma.siteProfile.update({ where: { id: PROFILE_ID }, data })
     return res.json(toProfile(profile))

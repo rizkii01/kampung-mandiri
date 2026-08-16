@@ -31,7 +31,7 @@ export default function ProfileAdminPage() {
     formState: { errors, isSubmitting },
   } = useForm<ProfileFormValues>({ resolver: zodResolver(profileSchema) })
 
-  const heroImageUrl = useWatch({ control, name: 'heroImageUrl' })
+  const heroImages = useWatch({ control, name: 'heroImages' }) ?? []
   const logoUrl = useWatch({ control, name: 'logoUrl' })
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function ProfileAdminPage() {
         jamOperasional: profile.jamOperasional,
         instagram: profile.instagram ?? '',
         heroImageUrl: profile.heroImageUrl ?? '',
+        heroImages: profile.heroImages && profile.heroImages.length > 0 ? profile.heroImages : profile.heroImageUrl ? [profile.heroImageUrl] : [],
         logoUrl: profile.logoUrl ?? '',
       })
     }
@@ -56,9 +57,12 @@ export default function ProfileAdminPage() {
 
   const onSubmit = async (values: ProfileFormValues) => {
     setNotice(null)
+    const cleanHero = (values.heroImages ?? []).filter(Boolean).slice(0, 3)
     await api.updateSiteProfile({
       ...values,
       misi: values.misi.split('\n').map((m) => m.trim()).filter(Boolean),
+      heroImages: cleanHero,
+      heroImageUrl: cleanHero[0] ?? null,
     })
     await queryClient.invalidateQueries({ queryKey: ['site-profile'] })
     setNotice({ type: 'success', text: 'Profil kampung berhasil disimpan.' })
@@ -115,11 +119,25 @@ export default function ProfileAdminPage() {
           <h2 className="text-sm font-bold uppercase tracking-wider text-gray-500">Foto</h2>
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
             <ImageUpload
-              label="Gambar Hero (halaman depan)"
-              value={heroImageUrl ?? ''}
-              onChange={(v) => setValue('heroImageUrl', v, { shouldDirty: true })}
+              label="Gambar Hero 1 (halaman depan)"
+              value={heroImages[0] ?? ''}
+              onChange={(v) => setValue('heroImages', [v, heroImages[1] ?? '', heroImages[2] ?? ''], { shouldDirty: true })}
               ratio="aspect-[4/3]"
               hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+            />
+            <ImageUpload
+              label="Gambar Hero 2 (opsional)"
+              value={heroImages[1] ?? ''}
+              onChange={(v) => setValue('heroImages', [heroImages[0] ?? '', v, heroImages[2] ?? ''], { shouldDirty: true })}
+              ratio="aspect-[4/3]"
+              hint="Bisa diisi untuk slide kedua"
+            />
+            <ImageUpload
+              label="Gambar Hero 3 (opsional)"
+              value={heroImages[2] ?? ''}
+              onChange={(v) => setValue('heroImages', [heroImages[0] ?? '', heroImages[1] ?? '', v], { shouldDirty: true })}
+              ratio="aspect-[4/3]"
+              hint="Bisa diisi untuk slide ketiga — maksimal 3 gambar"
             />
             <ImageUpload
               label="Logo Kampung"

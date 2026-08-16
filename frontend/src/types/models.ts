@@ -12,6 +12,7 @@ export interface SiteProfile {
   jamOperasional: string
   instagram?: string
   heroImageUrl?: string | null
+  heroImages?: string[]
   logoUrl?: string | null
 }
 
