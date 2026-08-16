@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { LogOut, Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuthStore } from '../../stores/authStore'
-import { cn } from '../../lib/utils'
+import { api } from '../../lib/api'
+import { cn, resolveImageUrl } from '../../lib/utils'
 import Button from '../ui/Button'
 
 const navItems = [
@@ -19,6 +21,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { isAuthenticated, logout } = useAuthStore()
+  const { data: profile } = useQuery({ queryKey: ['site-profile'], queryFn: api.getSiteProfile })
+  const logo = resolveImageUrl(profile?.logoUrl) || '/favicon.svg'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,10 +50,10 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-3 group">
           <motion.img
-            src="/favicon.svg"
+            src={logo}
             alt="Logo Sentra Tempe Bencongan"
             whileHover={{ rotate: 12, scale: 1.05 }}
-            className="h-10 w-10 rounded-2xl shadow-glow"
+            className="h-10 w-10 rounded-2xl object-cover shadow-glow"
           />
           <span className="text-sm font-extrabold leading-tight text-stone-900 sm:text-base tracking-tight">
             Sentra Tempe

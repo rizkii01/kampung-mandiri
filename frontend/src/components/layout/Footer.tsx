@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { AtSign, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { siteProfile } from '../../data/mock'
+import { api } from '../../lib/api'
+import { resolveImageUrl } from '../../lib/utils'
 
 const links = [
   { to: '/', label: 'Beranda' },
@@ -13,6 +16,9 @@ const links = [
 ]
 
 export default function Footer() {
+  const { data: profile } = useQuery({ queryKey: ['site-profile'], queryFn: api.getSiteProfile })
+  const logo = resolveImageUrl(profile?.logoUrl) || '/favicon.svg'
+
   return (
     <footer className="relative overflow-hidden bg-stone-900 text-stone-300 border-t border-stone-800">
       {/* Decorative colored glow in footer backdrop */}
@@ -23,10 +29,10 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <motion.img
-              src="/favicon.svg"
+              src={logo}
               alt="Logo Sentra Tempe Bencongan"
               whileHover={{ rotate: 10 }}
-              className="h-10 w-10 rounded-xl shadow-glow"
+              className="h-10 w-10 rounded-xl object-cover shadow-glow"
             />
             <span className="text-base font-extrabold text-white tracking-tight">
               Sentra Tempe

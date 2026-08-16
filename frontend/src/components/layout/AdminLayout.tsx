@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Images, Info, LayoutDashboard, LogOut, Menu, Newspaper, Sprout, Store, X } from 'lucide-react'
+import { Images, Info, LayoutDashboard, LogOut, Menu, Newspaper, Store, X } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
-import { cn } from '../../lib/utils'
+import { api } from '../../lib/api'
+import { cn, resolveImageUrl } from '../../lib/utils'
 import Seo from '../Seo'
 
 const menu = [
@@ -17,6 +19,8 @@ const menu = [
 export default function AdminLayout() {
   const { user, logout } = useAuthStore()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { data: profile } = useQuery({ queryKey: ['site-profile'], queryFn: api.getSiteProfile })
+  const logo = resolveImageUrl(profile?.logoUrl) || '/favicon.svg'
 
   const handleLogout = () => {
     setMenuOpen(false)
@@ -28,9 +32,7 @@ export default function AdminLayout() {
       <Seo title="Panel Admin" noindex />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-gray-200 bg-white lg:flex">
         <div className="flex h-16 items-center gap-2.5 border-b border-gray-200 px-5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
-            <Sprout className="h-4 w-4" aria-hidden />
-          </span>
+          <img src={logo} alt="Logo Sentra Tempe" className="h-9 w-9 rounded-lg object-cover ring-1 ring-gray-200" />
           <div>
             <p className="text-sm font-bold leading-tight text-gray-900">Admin Panel</p>
             <p className="text-xs text-gray-500">Sentra Tempe Bencongan</p>
@@ -83,9 +85,7 @@ export default function AdminLayout() {
             >
               <Menu className="h-5 w-5" aria-hidden />
             </button>
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
-              <Sprout className="h-4 w-4" aria-hidden />
-            </span>
+            <img src={logo} alt="Logo Sentra Tempe" className="h-9 w-9 rounded-lg object-cover ring-1 ring-gray-200" />
             <p className="text-sm font-bold text-gray-900">Admin Panel</p>
           </div>
           <div className="hidden text-sm text-gray-500 lg:block">
@@ -126,9 +126,7 @@ export default function AdminLayout() {
             >
               <div className="flex h-16 items-center justify-between border-b border-gray-200 px-5">
                 <div className="flex items-center gap-2.5">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
-                    <Sprout className="h-4 w-4" aria-hidden />
-                  </span>
+                  <img src={logo} alt="Logo Sentra Tempe" className="h-9 w-9 rounded-lg object-cover ring-1 ring-gray-200" />
                   <div>
                     <p className="text-sm font-bold leading-tight text-gray-900">Admin Panel</p>
                     <p className="text-xs text-gray-500">Sentra Tempe Bencongan</p>
