@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 export { default as LandingPage } from '../features/landing/LandingPage'
+export { default as AboutPage } from '../features/about/AboutPage'
 export { default as ProfilePage } from '../features/profile/ProfilePage'
 export { default as UmkmListPage } from '../features/umkm/UmkmListPage'
 export { default as UmkmDetailPage } from '../features/umkm/UmkmDetailPage'

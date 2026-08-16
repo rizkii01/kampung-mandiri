@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { CheckCircle2, History, Info, Target, ShieldCheck, Sprout } from 'lucide-react'
+import { CheckCircle2, History, Target, ShieldCheck, Sprout } from 'lucide-react'
 import { api } from '../../lib/api'
 import Photo from '../../components/ui/Photo'
 import SectionHeading from '../../components/ui/SectionHeading'
@@ -82,18 +82,6 @@ export default function ProfilePage() {
           </motion.div>
         </div>
       </section>
-
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 -mt-6">
-        <div className="flex items-start gap-3 rounded-2xl border border-tempe-green-200 bg-tempe-green-50/70 p-4 text-tempe-green-900">
-          <Info className="mt-0.5 h-5 w-5 shrink-0 text-tempe-green-700" aria-hidden />
-          <p className="text-sm leading-relaxed">
-            <strong className="font-semibold">Disclaimer:</strong> Kampung Mandiri Sentra Tempe ini hanya ada di{' '}
-            <strong className="font-semibold">RW 01 Kelurahan Bencongan</strong>, Kecamatan Kelapa Dua, Kabupaten
-            Tangerang, Provinsi Banten. Website ini dikhususkan untuk wilayah RW 01 yang terdiri dari{' '}
-            <strong className="font-semibold">9 RT</strong>.
-          </p>
-        </div>
-      </div>
 
       {/* Sejarah dengan Lini Masa */}
       <section className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
@@ -202,7 +190,7 @@ export default function ProfilePage() {
         <SectionHeading
           eyebrow="Nilai Budaya"
           title="Prinsip Kampung Mandiri"
-          subtitle="Tiga pilar utama pengembangan Sentra Tempe Bencongan oleh Karang Taruna."
+          subtitle="Tiga pilar utama pengembangan Sentra Tempe Bencongan oleh masyarakat."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {[

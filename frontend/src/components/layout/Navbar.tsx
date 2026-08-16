@@ -9,6 +9,7 @@ import Button from '../ui/Button'
 const navItems = [
   { to: '/', label: 'Beranda' },
   { to: '/profil', label: 'Profil' },
+  { to: '/tentang', label: 'Tentang' },
   { to: '/umkm', label: 'UMKM' },
   { to: '/kegiatan', label: 'Kegiatan' },
   { to: '/kontak', label: 'Kontak' },

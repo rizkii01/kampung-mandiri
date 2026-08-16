@@ -5,6 +5,7 @@ import AdminLayout from '../components/layout/AdminLayout'
 import ProtectedRoute from '../components/ProtectedRoute'
 import Spinner from '../components/ui/Spinner'
 import {
+  AboutPage,
   AdminDashboardPage,
   ContactPage,
   GalleryAdminPage,
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: withSuspense(<LandingPage />) },
       { path: '/profil', element: withSuspense(<ProfilePage />) },
+      { path: '/tentang', element: withSuspense(<AboutPage />) },
       { path: '/umkm', element: withSuspense(<UmkmListPage />) },
       { path: '/umkm/:id', element: withSuspense(<UmkmDetailPage />) },
       { path: '/kegiatan', element: withSuspense(<NewsListPage />) },
