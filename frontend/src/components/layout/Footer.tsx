@@ -92,7 +92,7 @@ export default function Footer() {
       <div className="relative border-t border-stone-800 bg-stone-950/40">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-stone-500 sm:flex-row sm:px-6 lg:px-8">
           <p>© {new Date().getFullYear()} Kampung Mandiri Sentra Tempe — RW 01 Kelurahan Bencongan. All rights reserved.</p>
-          <p className="font-semibold text-stone-600">Dikembangkan oleh Masyarakat RW 01 Kelurahan Bencongan</p>
+          <p className="font-semibold text-stone-600">Dibuat oleh KKN Kelompok 2 Universitas Yatsi Madani</p>
         </div>
       </div>
     </footer>

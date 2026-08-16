@@ -86,10 +86,11 @@ export default function AboutPage() {
           className="space-y-6 text-sm leading-relaxed text-stone-700 sm:text-base"
         >
           <motion.p variants={itemStagger}>
-            Aplikasi ini dibuat sebagai media informasi digital Kampung Mandiri Sentra Tempe yang berada di RW 01
-            Kelurahan Bencongan, Kecamatan Kelapa Dua, Kabupaten Tangerang, Provinsi Banten. Melalui aplikasi ini,
-            pengunjung dapat mengenal profil kampung, melihat daftar UMKM perajin tempe, membaca berita kegiatan,
-            menjelajahi galeri foto, serta menghubungi pengelola kampung.
+            Aplikasi ini dibuat oleh KKN Kelompok 2 Universitas Yatsi Madani sebagai media informasi digital
+            Kampung Mandiri Sentra Tempe yang berada di RW 01 Kelurahan Bencongan, Kecamatan Kelapa Dua, Kabupaten
+            Tangerang, Provinsi Banten. Melalui aplikasi ini, pengunjung dapat mengenal profil kampung, melihat
+            daftar UMKM perajin tempe, membaca berita kegiatan, menjelajahi galeri foto, serta menghubungi
+            pengelola kampung.
           </motion.p>
           <motion.p variants={itemStagger}>
             Kehadiran aplikasi ini adalah wujud digitalisasi kampung tempe — menghadirkan informasi yang
@@ -157,9 +158,9 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold text-white">Dikelola oleh Masyarakat</h2>
               <p className="mt-3 leading-relaxed text-tempe-green-50">
-                Kampung Mandiri Sentra Tempe dan aplikasi ini dikelola oleh masyarakat RW 01 Kelurahan Bencongan.
-                Seluruh informasi, konten, dan data yang tampil diperbarui secara mandiri untuk kepentingan warga
-                dan kemajuan kampung tempe.
+                Kampung Mandiri Sentra Tempe dan aplikasi ini dikelola oleh masyarakat RW 01 Kelurahan Bencongan,
+                dibuat oleh KKN Kelompok 2 Universitas Yatsi Madani. Seluruh informasi, konten, dan data yang
+                tampil diperbarui secara mandiri untuk kepentingan warga dan kemajuan kampung tempe.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/umkm">
