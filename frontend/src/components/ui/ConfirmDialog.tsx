@@ -23,7 +23,7 @@ export default function ConfirmDialog({
   return (
     <Modal open={open} title={title} onClose={onCancel} maxWidth="max-w-sm">
       <p className="text-sm leading-relaxed text-gray-600">{message}</p>
-      <div className="mt-6 flex justify-end gap-3">
+      <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <Button variant="outline" onClick={onCancel} disabled={loading}>
           Batal
         </Button>

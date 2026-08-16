@@ -114,7 +114,7 @@ export default function UmkmDetailPage() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
                       {item.label}
                     </p>
-                    <p className="mt-0.5 text-sm font-medium text-stone-900">{item.value}</p>
+                    <p className="mt-0.5 text-sm font-medium break-words text-stone-900">{item.value}</p>
                   </div>
                 </div>
               ))}

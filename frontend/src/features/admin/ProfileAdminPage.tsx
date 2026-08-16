@@ -144,7 +144,7 @@ export default function ProfileAdminPage() {
           </div>
         </Card>
 
-        <div className="flex justify-end">
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <Button type="submit" size="lg" disabled={isSubmitting}>
             <Save className="h-4 w-4" aria-hidden />
             {isSubmitting ? 'Menyimpan...' : 'Simpan Perubahan'}

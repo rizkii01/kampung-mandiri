@@ -147,7 +147,7 @@ export default function GalleryAdminPage() {
                   <button
                     type="button"
                     onClick={() => openEdit(item)}
-                    className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
                     aria-label={`Edit ${item.caption}`}
                   >
                     <Pencil className="h-4 w-4" aria-hidden />
@@ -155,7 +155,7 @@ export default function GalleryAdminPage() {
                   <button
                     type="button"
                     onClick={() => setDeleting(item)}
-                    className="rounded-lg p-2 text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
                     aria-label={`Hapus ${item.caption}`}
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />
@@ -204,7 +204,7 @@ export default function GalleryAdminPage() {
             </div>
           </FormSection>
 
-          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
+          <div className="flex flex-col-reverse gap-3 border-t border-gray-100 pt-4 sm:flex-row sm:justify-end">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
               Batal
             </Button>
