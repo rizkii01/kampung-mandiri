@@ -19,6 +19,7 @@ import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
 import Textarea from '../../components/ui/Textarea'
 import ImageUpload from '../../components/admin/ImageUpload'
+import FormSection from '../../components/admin/FormSection'
 import { formatTanggal } from '../../lib/utils'
 
 const kategoriOptions = [
@@ -180,39 +181,62 @@ export default function NewsAdminPage() {
         onClose={() => setModalOpen(false)}
         maxWidth="max-w-2xl"
       >
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2" noValidate>
-          <div className="sm:col-span-2">
-            <Input label="Judul" error={errors.judul?.message} {...register('judul')} />
-          </div>
-          <Select
-            label="Kategori"
-            options={kategoriOptions}
-            error={errors.kategori?.message}
-            {...register('kategori')}
-          />
-          <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
-          <Input label="Penulis" error={errors.penulis?.message} {...register('penulis')} />
-          <div className="sm:col-span-2">
-            <ImageUpload
-              label="Foto Sampul (opsional)"
-              value={coverUrl ?? ''}
-              onChange={(v) => setValue('coverUrl', v, { shouldDirty: true })}
-              ratio="aspect-video"
-              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+          <FormSection title="Informasi Dasar">
+            <div className="sm:col-span-2">
+              <Input
+                label="Judul"
+                placeholder="contoh: Pelatihan Pembuatan Tempe Higienis"
+                error={errors.judul?.message}
+                {...register('judul')}
+              />
+            </div>
+            <Select
+              label="Kategori"
+              options={kategoriOptions}
+              error={errors.kategori?.message}
+              {...register('kategori')}
             />
-          </div>
-          <div className="sm:col-span-2">
-            <Textarea label="Ringkasan" rows={3} error={errors.ringkasan?.message} {...register('ringkasan')} />
-          </div>
-          <div className="sm:col-span-2">
-            <Textarea
-              label="Konten (paragraf dipisah baris kosong)"
-              rows={8}
-              error={errors.konten?.message}
-              {...register('konten')}
-            />
-          </div>
-          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
+            <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
+            <div className="sm:col-span-2">
+              <Input label="Penulis" error={errors.penulis?.message} {...register('penulis')} />
+            </div>
+          </FormSection>
+
+          <FormSection title="Isi Berita">
+            <div className="sm:col-span-2">
+              <Textarea
+                label="Ringkasan"
+                rows={3}
+                placeholder="Tulis 1–2 kalimat ringkas tentang isi berita. Teks ini tampil di daftar berita."
+                error={errors.ringkasan?.message}
+                {...register('ringkasan')}
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <Textarea
+                label="Konten"
+                rows={8}
+                placeholder="Tulis isi berita secara lengkap. Pisahkan paragraf dengan baris kosong."
+                error={errors.konten?.message}
+                {...register('konten')}
+              />
+            </div>
+          </FormSection>
+
+          <FormSection title="Foto Sampul">
+            <div className="sm:col-span-2">
+              <ImageUpload
+                label="Foto Sampul (opsional)"
+                value={coverUrl ?? ''}
+                onChange={(v) => setValue('coverUrl', v, { shouldDirty: true })}
+                ratio="aspect-video"
+                hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+              />
+            </div>
+          </FormSection>
+
+          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
               Batal
             </Button>

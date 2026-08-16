@@ -19,6 +19,7 @@ import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
 import Textarea from '../../components/ui/Textarea'
 import ImageUpload from '../../components/admin/ImageUpload'
+import FormSection from '../../components/admin/FormSection'
 
 export default function UmkmAdminPage() {
   const queryClient = useQueryClient()
@@ -194,38 +195,90 @@ export default function UmkmAdminPage() {
         onClose={() => setModalOpen(false)}
         maxWidth="max-w-2xl"
       >
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2" noValidate>
-          <Input label="Nama UMKM" placeholder="Tempe Pak Slamet" error={errors.nama?.message} {...register('nama')} />
-          <Input label="Nama Pemilik" error={errors.pemilik?.message} {...register('pemilik')} />
-          <div className="sm:col-span-2">
-            <Textarea label="Deskripsi" rows={3} error={errors.deskripsi?.message} {...register('deskripsi')} />
-          </div>
-          <div className="sm:col-span-2">
-            <Input label="Alamat" error={errors.alamat?.message} {...register('alamat')} />
-          </div>
-          <Input label="No. HP" error={errors.noHp?.message} {...register('noHp')} />
-          <Input label="Kapasitas" placeholder="120 kg kedelai/hari" error={errors.kapasitas?.message} {...register('kapasitas')} />
-          <Select
-            label="Status"
-            options={[
-              { value: 'AKTIF', label: 'Aktif' },
-              { value: 'NONAKTIF', label: 'Nonaktif' },
-            ]}
-            error={errors.status?.message}
-            {...register('status')}
-          />
-          <Input label="Produk (pisahkan dengan koma)" placeholder="Tempe Kedelai, Tempe Gembus" error={errors.produk?.message} {...register('produk')} />
-          <Input label="Bergabung Sejak" placeholder="Januari 2024" error={errors.bergabungSejak?.message} {...register('bergabungSejak')} />
-          <div className="sm:col-span-2">
-            <ImageUpload
-              label="Foto Produk (opsional)"
-              value={imageUrl ?? ''}
-              onChange={(v) => setValue('imageUrl', v, { shouldDirty: true })}
-              ratio="aspect-[4/3]"
-              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+          <FormSection title="Data Usaha">
+            <Input
+              label="Nama UMKM"
+              placeholder="contoh: Tempe Pak Slamet"
+              error={errors.nama?.message}
+              {...register('nama')}
             />
-          </div>
-          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
+            <Input
+              label="Nama Pemilik"
+              placeholder="contoh: Slamet Riyadi"
+              error={errors.pemilik?.message}
+              {...register('pemilik')}
+            />
+            <Input
+              label="Bergabung Sejak"
+              placeholder="Januari 2024"
+              error={errors.bergabungSejak?.message}
+              {...register('bergabungSejak')}
+            />
+            <Select
+              label="Status"
+              options={[
+                { value: 'AKTIF', label: 'Aktif' },
+                { value: 'NONAKTIF', label: 'Nonaktif' },
+              ]}
+              error={errors.status?.message}
+              {...register('status')}
+            />
+            <div className="sm:col-span-2">
+              <Input
+                label="Produk (pisahkan dengan koma)"
+                placeholder="contoh: Tempe Kedelai, Tempe Gembus"
+                error={errors.produk?.message}
+                {...register('produk')}
+              />
+            </div>
+          </FormSection>
+
+          <FormSection title="Detail Usaha">
+            <div className="sm:col-span-2">
+              <Textarea
+                label="Deskripsi"
+                rows={4}
+                placeholder="contoh: Usaha tempe rumahan sejak 1998. Memproduksi tempe kedelai higienis tanpa pengawet dengan kapasitas 100 kg kedelai per hari."
+                error={errors.deskripsi?.message}
+                {...register('deskripsi')}
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <Input
+                label="Alamat"
+                placeholder="contoh: Kp. Bencongan, RT 01/RW 01, Kelapa Dua, Tangerang"
+                error={errors.alamat?.message}
+                {...register('alamat')}
+              />
+            </div>
+            <Input
+              label="No. HP"
+              placeholder="contoh: 0812-3456-7890"
+              error={errors.noHp?.message}
+              {...register('noHp')}
+            />
+            <Input
+              label="Kapasitas"
+              placeholder="120 kg kedelai/hari"
+              error={errors.kapasitas?.message}
+              {...register('kapasitas')}
+            />
+          </FormSection>
+
+          <FormSection title="Foto">
+            <div className="sm:col-span-2">
+              <ImageUpload
+                label="Foto Produk (opsional)"
+                value={imageUrl ?? ''}
+                onChange={(v) => setValue('imageUrl', v, { shouldDirty: true })}
+                ratio="aspect-[4/3]"
+                hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+              />
+            </div>
+          </FormSection>
+
+          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
               Batal
             </Button>

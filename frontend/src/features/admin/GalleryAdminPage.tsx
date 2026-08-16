@@ -19,6 +19,7 @@ import Photo from '../../components/ui/Photo'
 import Select from '../../components/ui/Select'
 import Spinner from '../../components/ui/Spinner'
 import ImageUpload from '../../components/admin/ImageUpload'
+import FormSection from '../../components/admin/FormSection'
 import { formatTanggalPendek } from '../../lib/utils'
 
 const kategoriOptions = [
@@ -172,27 +173,38 @@ export default function GalleryAdminPage() {
         onClose={() => setModalOpen(false)}
         maxWidth="max-w-lg"
       >
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2" noValidate>
-          <div className="sm:col-span-2">
-            <Input label="Keterangan Foto" error={errors.caption?.message} {...register('caption')} />
-          </div>
-          <Select
-            label="Kategori"
-            options={kategoriOptions}
-            error={errors.kategori?.message}
-            {...register('kategori')}
-          />
-          <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
-          <div className="sm:col-span-2">
-            <ImageUpload
-              label="Foto (opsional)"
-              value={url ?? ''}
-              onChange={(v) => setValue('url', v, { shouldDirty: true })}
-              ratio="aspect-square"
-              hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+          <FormSection title="Informasi Foto">
+            <div className="sm:col-span-2">
+              <Input
+                label="Keterangan Foto"
+                placeholder="contoh: Proses perebusan kedelai"
+                error={errors.caption?.message}
+                {...register('caption')}
+              />
+            </div>
+            <Select
+              label="Kategori"
+              options={kategoriOptions}
+              error={errors.kategori?.message}
+              {...register('kategori')}
             />
-          </div>
-          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 sm:col-span-2">
+            <Input label="Tanggal" type="date" error={errors.tanggal?.message} {...register('tanggal')} />
+          </FormSection>
+
+          <FormSection title="Foto">
+            <div className="sm:col-span-2">
+              <ImageUpload
+                label="Foto (opsional)"
+                value={url ?? ''}
+                onChange={(v) => setValue('url', v, { shouldDirty: true })}
+                ratio="aspect-square"
+                hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+              />
+            </div>
+          </FormSection>
+
+          <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
               Batal
             </Button>
