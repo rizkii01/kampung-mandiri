@@ -1,3 +1,14 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/profil", "destination": "/index.html" },
+    { "source": "/tentang", "destination": "/index.html" },
+    { "source": "/umkm/:id", "destination": "/index.html" },
+    { "source": "/umkm", "destination": "/index.html" },
+    { "source": "/kegiatan/:id", "destination": "/index.html" },
+    { "source": "/kegiatan", "destination": "/index.html" },
+    { "source": "/kontak", "destination": "/index.html" },
+    { "source": "/", "destination": "/index.html" }
+  ]
 }
