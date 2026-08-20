@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export const SITE_URL = 'https://kampung-mandiri.vercel.app'
-export const SITE_NAME = 'Kampung Mandiri Sentra Tempe'
+export const SITE_NAME = 'Kampung Mandiri | Sentra Tempe'
 export const SITE_TITLE = 'Sentra Tempe Bencongan — Kampung Mandiri'
 export const DEFAULT_DESCRIPTION =
   'Portal digital Kampung Mandiri Sentra Tempe RW 01 Kelurahan Bencongan, Kelapa Dua, Tangerang. Profil kampung tempe, daftar UMKM perajin tempe, kegiatan Karang Taruna, galeri foto, dan kontak.'
