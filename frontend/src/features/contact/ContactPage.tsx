@@ -28,7 +28,7 @@ export default function ContactPage() {
     <div>
       <Seo
         title="Kontak Kampung Tempe"
-        description={`Hubungi ${siteProfile.nama}, Kelurahan Bencongan, Kelapa Dua, Tangerang. Alamat: ${siteProfile.alamat}. Telepon: ${siteProfile.noHp}. Email: ${siteProfile.email}.`}
+        description={`Hubungi ${data.nama}, Kelurahan Bencongan, Kelapa Dua, Tangerang. Alamat: ${data.alamat}. Telepon: ${data.noHp}. Email: ${data.email}.`}
         keywords="kontak karang taruna bencongan, alamat kampung tempe karawang, pesan tempe bencongan, sentra tempe klari"
       />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">

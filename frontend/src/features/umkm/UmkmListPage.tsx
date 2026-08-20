@@ -11,10 +11,15 @@ import Photo from '../../components/ui/Photo'
 import SectionHeading from '../../components/ui/SectionHeading'
 import Spinner from '../../components/ui/Spinner'
 import { containerStagger, itemStagger } from '../../lib/motion'
-import { siteProfile } from '../../data/mock'
 import Seo from '../../components/Seo'
+import { siteProfile } from '../../data/mock'
 
 export default function UmkmListPage() {
+  const { data: profile } = useQuery({
+    queryKey: ['site-profile'],
+    queryFn: api.getSiteProfile,
+  })
+  const data = profile ?? siteProfile
   const { data: umkm, isLoading } = useQuery({
     queryKey: ['umkm'],
     queryFn: api.getUmkmList,
@@ -37,7 +42,7 @@ export default function UmkmListPage() {
     <div>
       <Seo
         title="UMKM Perajin Tempe"
-        description={`Daftar unit usaha UMKM tempe di ${siteProfile.nama}, Kelapa Dua, Tangerang — profil produsen, produk, kapasitas produksi, dan kontak perajin tempe Bencongan.`}
+        description={`Daftar unit usaha UMKM tempe di ${data.nama}, Kelapa Dua, Tangerang — profil produsen, produk, kapasitas produksi, dan kontak perajin tempe Bencongan.`}
         keywords="umkm tempe, perajin tempe bencongan, produsen tempe karawang, tempe kedelai klari, jual tempe"
       />
       <section className="bg-gradient-to-br from-tempe-cream-50 via-white to-tempe-green-50/30">
@@ -45,7 +50,7 @@ export default function UmkmListPage() {
           <SectionHeading
             eyebrow="Anggota Kampung"
             title="UMKM Perajin Tempe"
-            subtitle={`Daftar unit usaha tempe yang tergabung dalam ${siteProfile.nama}.`}
+            subtitle={`Daftar unit usaha tempe yang tergabung dalam ${data.nama}.`}
           />
           <div className="relative mx-auto mt-8 max-w-md">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-stone-400" aria-hidden />

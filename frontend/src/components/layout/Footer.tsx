@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { AtSign, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { siteProfile } from '../../data/mock'
 import { api } from '../../lib/api'
 import { resolveImageUrl } from '../../lib/utils'
+import { siteProfile } from '../../data/mock'
 
 const links = [
   { to: '/', label: 'Beranda' },
@@ -17,7 +17,8 @@ const links = [
 
 export default function Footer() {
   const { data: profile } = useQuery({ queryKey: ['site-profile'], queryFn: api.getSiteProfile })
-  const logo = resolveImageUrl(profile?.logoUrl) || '/favicon.svg'
+  const data = profile ?? siteProfile
+  const logo = resolveImageUrl(data.logoUrl) || '/favicon.svg'
 
   return (
     <footer className="relative overflow-hidden bg-stone-900 text-stone-300 border-t border-stone-800">
@@ -40,18 +41,18 @@ export default function Footer() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone-400">
-            {siteProfile.tagline}. Profil digital sentra UMKM tempe yang dikelola oleh masyarakat, khusus untuk wilayah RW 01, Kelapa Dua, Tangerang, Banten.
+            {data.tagline}. Profil digital sentra UMKM tempe yang dikelola oleh masyarakat, khusus untuk wilayah RW 01, Kelapa Dua, Tangerang, Banten.
           </p>
-          {siteProfile.instagram && (
+          {data.instagram && (
             <motion.a
               whileHover={{ x: 4, textShadow: '0 0 8px rgba(16,185,129,0.3)' }}
-              href={`https://instagram.com/${siteProfile.instagram.replace('@', '')}`}
+              href={`https://instagram.com/${data.instagram.replace('@', '')}`}
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-flex items-center gap-2 text-sm text-stone-400 hover:text-tempe-green-400 transition-all"
             >
               <AtSign className="h-4.5 w-4.5 text-tempe-green-500" aria-hidden />
-              {siteProfile.instagram}
+              {data.instagram}
             </motion.a>
           )}
         </div>
@@ -77,19 +78,19 @@ export default function Footer() {
           <ul className="mt-4 space-y-3.5 text-sm text-stone-400">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4.5 w-4.5 shrink-0 text-tempe-green-500" aria-hidden />
-              <span className="leading-relaxed">{siteProfile.alamat}</span>
+              <span className="leading-relaxed">{data.alamat}</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4.5 w-4.5 shrink-0 text-tempe-green-500" aria-hidden />
-              <span>{siteProfile.noHp}</span>
+              <span>{data.noHp}</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4.5 w-4.5 shrink-0 text-tempe-green-500" aria-hidden />
-              <span>{siteProfile.email}</span>
+              <span>{data.email}</span>
             </li>
             <li className="flex items-center gap-3">
               <Clock className="h-4.5 w-4.5 shrink-0 text-tempe-green-500" aria-hidden />
-              <span>{siteProfile.jamOperasional}</span>
+              <span>{data.jamOperasional}</span>
             </li>
           </ul>
         </div>
