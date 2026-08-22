@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, CalendarDays, MapPin, Phone, Search, User } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -24,8 +24,18 @@ export default function UmkmListPage() {
     queryKey: ['umkm'],
     queryFn: api.getUmkmList,
   })
+  const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState('')
-  const [kategori, setKategori] = useState<string>('SEMUA')
+  const kategori = searchParams.get('kategori') ?? 'SEMUA'
+
+  const setKategori = (val: string) => {
+    if (val === 'SEMUA') {
+      searchParams.delete('kategori')
+    } else {
+      searchParams.set('kategori', val)
+    }
+    setSearchParams(searchParams, { replace: true })
+  }
 
   const filtered = useMemo(() => {
     if (!umkm) return []

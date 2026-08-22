@@ -1,18 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { LogOut, Menu, X } from 'lucide-react'
+import { ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuthStore } from '../../stores/authStore'
 import { api } from '../../lib/api'
 import { cn, resolveImageUrl } from '../../lib/utils'
 import Button from '../ui/Button'
 
-const navItems = [
+const topNavItems = [
   { to: '/', label: 'Beranda' },
   { to: '/profil', label: 'Profil' },
   { to: '/tentang', label: 'Tentang' },
-  { to: '/umkm', label: 'UMKM' },
+]
+
+const umkmSubItems = [
+  { to: '/umkm', label: 'Semua UMKM' },
+  { to: '/umkm?kategori=UMUM', label: 'UMKM Umum' },
+  { to: '/umkm?kategori=TEMPE', label: 'UMKM Tempe' },
+]
+
+const bottomNavItems = [
   { to: '/kegiatan', label: 'Kegiatan' },
   { to: '/kontak', label: 'Kontak' },
 ]
@@ -20,6 +28,8 @@ const navItems = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [umkmDropdown, setUmkmDropdown] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const { isAuthenticated, logout } = useAuthStore()
   const { data: profile } = useQuery({ queryKey: ['site-profile'], queryFn: api.getSiteProfile })
   const logo = resolveImageUrl(profile?.logoUrl) || '/favicon.svg'
@@ -36,7 +46,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setUmkmDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const closeMenu = () => setOpen(false)
+  const closeDropdown = () => setUmkmDropdown(false)
 
   return (
     <header
@@ -65,11 +86,62 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <nav className="hidden items-center gap-1.5 md:flex rounded-2xl bg-stone-100/60 p-1 border border-stone-200/20">
-          {navItems.map((item) => (
+          {topNavItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
+              className={({ isActive }) =>
+                cn(
+                  'rounded-xl px-4 py-2 text-sm font-semibold transition-all relative duration-200',
+                  isActive
+                    ? 'bg-white text-tempe-green-700 shadow-sm border border-stone-200/20'
+                    : 'text-stone-600 hover:text-stone-950 hover:bg-white/40',
+                )
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+
+          {/* UMKM Dropdown */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setUmkmDropdown((v) => !v)}
+              className="flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 text-stone-600 hover:text-stone-950 hover:bg-white/40"
+            >
+              UMKM
+              <ChevronDown className={cn('h-3.5 w-3.5 transition-transform', umkmDropdown && 'rotate-180')} aria-hidden />
+            </button>
+            <AnimatePresence>
+              {umkmDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full z-50 mt-1.5 w-48 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-lg"
+                >
+                  {umkmSubItems.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={closeDropdown}
+                      className="block px-4 py-2.5 text-sm font-medium text-stone-600 transition-colors hover:bg-tempe-green-50 hover:text-tempe-green-700"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {bottomNavItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
               className={({ isActive }) =>
                 cn(
                   'rounded-xl px-4 py-2 text-sm font-semibold transition-all relative duration-200',
@@ -123,7 +195,7 @@ export default function Navbar() {
             className="border-t border-stone-200/50 bg-white/95 backdrop-blur-lg px-4 pb-5 pt-3 md:hidden overflow-hidden shadow-inner"
           >
             <nav className="flex flex-col gap-1">
-              {navItems.map((item, idx) => (
+              {[...topNavItems, ...bottomNavItems].map((item, idx) => (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -147,6 +219,32 @@ export default function Navbar() {
                   </NavLink>
                 </motion.div>
               ))}
+
+              {/* Mobile UMKM Sub-menu */}
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.15 }}
+              >
+                <p className="px-4.5 pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-stone-400">UMKM</p>
+                {umkmSubItems.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    onClick={closeMenu}
+                    className={({ isActive }) =>
+                      cn(
+                        'block rounded-xl px-4.5 py-2.5 pl-8 text-sm font-medium transition-all',
+                        isActive
+                          ? 'bg-tempe-green-100/60 text-tempe-green-800'
+                          : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900',
+                      )
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </motion.div>
             </nav>
             <motion.div
               initial={{ opacity: 0 }}
