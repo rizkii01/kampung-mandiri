@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Factory, MapPin, MessageCircle, Phone, User, Wrench } from 'lucide-react'
+import { ArrowLeft, AtSign, Factory, MapPin, MessageCircle, Phone, User, Wrench } from 'lucide-react'
 import { api } from '../../lib/api'
 import Badge from '../../components/ui/Badge'
 import Card from '../../components/ui/Card'
@@ -49,7 +49,7 @@ export default function UmkmDetailPage() {
     { icon: Factory, label: 'Kapasitas', value: umkm.kapasitas },
   ]
 
-  const waNumber = umkm.noHp.replace(/\D/g, '')
+  const waNumber = (umkm.whatsapp || umkm.noHp).replace(/\D/g, '')
   const waLink = `https://wa.me/62${waNumber.replace(/^0/, '')}?text=${encodeURIComponent(
     `Halo ${umkm.nama}, saya tertarik dengan produk tempe Anda.`,
   )}`
@@ -97,7 +97,10 @@ export default function UmkmDetailPage() {
           <div className="p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h1 className="text-2xl font-bold text-stone-900 sm:text-3xl">{umkm.nama}</h1>
-              <Badge tone={umkm.status === 'AKTIF' ? 'green' : 'gray'}>{umkm.status}</Badge>
+              <div className="flex gap-2">
+                <Badge tone={umkm.kategori === 'TEMPE' ? 'green' : 'gray'}>{umkm.kategori === 'TEMPE' ? 'Tempe' : 'Umum'}</Badge>
+                <Badge tone={umkm.status === 'AKTIF' ? 'green' : 'gray'}>{umkm.status}</Badge>
+              </div>
             </div>
             <p className="mt-2 text-sm text-stone-500">Bergabung sejak {umkm.bergabungSejak}</p>
 
@@ -133,6 +136,61 @@ export default function UmkmDetailPage() {
                 ))}
               </div>
             </div>
+
+            {(umkm.whatsapp || umkm.instagram || umkm.tiktok || umkm.mapsUrl) && (
+              <div className="mt-8">
+                <h2 className="flex items-center gap-2 text-base font-bold text-stone-900">
+                  <AtSign className="h-5 w-5 text-tempe-green-600" aria-hidden />
+                  Media Sosial & Lokasi
+                </h2>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {umkm.whatsapp && (
+                    <a
+                      href={`https://wa.me/62${umkm.whatsapp.replace(/\D/g, '').replace(/^0/, '')}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105"
+                    >
+                      <MessageCircle className="h-4 w-4" aria-hidden />
+                      WhatsApp
+                    </a>
+                  )}
+                  {umkm.instagram && (
+                    <a
+                      href={`https://instagram.com/${umkm.instagram.replace('@', '')}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105"
+                    >
+                      <AtSign className="h-4 w-4" aria-hidden />
+                      Instagram
+                    </a>
+                  )}
+                  {umkm.tiktok && (
+                    <a
+                      href={`https://tiktok.com/@${umkm.tiktok.replace('@', '')}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105"
+                    >
+                      <span className="font-bold" aria-hidden>T</span>
+                      TikTok
+                    </a>
+                  )}
+                  {umkm.mapsUrl && (
+                    <a
+                      href={umkm.mapsUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105"
+                    >
+                      <MapPin className="h-4 w-4" aria-hidden />
+                      Lihat di Maps
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
 
             <motion.a
               href={waLink}

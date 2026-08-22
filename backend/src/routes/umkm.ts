@@ -15,17 +15,36 @@ const umkmSchema = z.object({
   noHp: z.string().min(1, 'No HP wajib diisi'),
   kapasitas: z.string().min(1, 'Kapasitas wajib diisi'),
   status: z.enum(['AKTIF', 'NONAKTIF']),
+  kategori: z.enum(['UMUM', 'TEMPE']),
   produk: z.array(z.string()).min(1, 'Produk wajib diisi'),
   bergabungSejak: z.string().min(1, 'Bergabung sejak wajib diisi'),
   imageUrl: z.string().nullable().optional(),
+  whatsapp: z.string().nullable().optional(),
+  instagram: z.string().nullable().optional(),
+  tiktok: z.string().nullable().optional(),
+  mapsUrl: z.string().nullable().optional(),
 })
 
 const splitProduk = (produk: string | null) =>
   (produk ?? '').split(',').map((p) => p.trim()).filter(Boolean)
 
 const toUmkm = (umkm: Umkm) => ({
-  ...umkm,
+  id: umkm.id,
+  nama: umkm.nama,
+  pemilik: umkm.pemilik,
+  deskripsi: umkm.deskripsi,
+  alamat: umkm.alamat,
+  noHp: umkm.noHp,
+  kapasitas: umkm.kapasitas,
+  status: umkm.status,
+  kategori: umkm.kategori,
   produk: splitProduk(umkm.produk),
+  bergabungSejak: umkm.bergabungSejak,
+  imageUrl: umkm.imageUrl,
+  whatsapp: umkm.whatsapp,
+  instagram: umkm.instagram,
+  tiktok: umkm.tiktok,
+  mapsUrl: umkm.mapsUrl,
 })
 
 router.get(

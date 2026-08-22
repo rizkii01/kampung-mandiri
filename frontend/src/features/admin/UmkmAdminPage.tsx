@@ -56,9 +56,14 @@ export default function UmkmAdminPage() {
       noHp: '',
       kapasitas: '',
       status: 'AKTIF',
+      kategori: 'UMUM',
       produk: '',
       bergabungSejak: '',
       imageUrl: '',
+      whatsapp: '',
+      instagram: '',
+      tiktok: '',
+      mapsUrl: '',
     })
     setModalOpen(true)
   }
@@ -73,9 +78,14 @@ export default function UmkmAdminPage() {
       noHp: umkm.noHp,
       kapasitas: umkm.kapasitas,
       status: umkm.status,
+      kategori: umkm.kategori ?? 'UMUM',
       produk: umkm.produk.join(', '),
       bergabungSejak: umkm.bergabungSejak,
       imageUrl: umkm.imageUrl ?? '',
+      whatsapp: umkm.whatsapp ?? '',
+      instagram: umkm.instagram ?? '',
+      tiktok: umkm.tiktok ?? '',
+      mapsUrl: umkm.mapsUrl ?? '',
     })
     setModalOpen(true)
   }
@@ -86,6 +96,10 @@ export default function UmkmAdminPage() {
       ...values,
       produk: values.produk.split(',').map((p) => p.trim()).filter(Boolean),
       imageUrl: values.imageUrl?.trim() || null,
+      whatsapp: values.whatsapp?.trim() || null,
+      instagram: values.instagram?.trim() || null,
+      tiktok: values.tiktok?.trim() || null,
+      mapsUrl: values.mapsUrl?.trim() || null,
     }
     if (editing) {
       await api.updateUmkm(editing.id, payload)
@@ -147,6 +161,7 @@ export default function UmkmAdminPage() {
                 <tr className="border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-500">
                   <th className="px-5 py-3">Nama UMKM</th>
                   <th className="px-5 py-3">Pemilik</th>
+                  <th className="hidden px-5 py-3 md:table-cell">Kategori</th>
                   <th className="hidden px-5 py-3 md:table-cell">Kapasitas</th>
                   <th className="px-5 py-3">Status</th>
                   <th className="px-5 py-3 text-right">Aksi</th>
@@ -157,6 +172,9 @@ export default function UmkmAdminPage() {
                   <tr key={umkm.id} className="transition-colors hover:bg-gray-50">
                     <td className="px-5 py-3 font-medium text-gray-900">{umkm.nama}</td>
                     <td className="px-5 py-3 text-gray-600">{umkm.pemilik}</td>
+                    <td className="hidden px-5 py-3 text-gray-600 md:table-cell">
+                      <Badge tone={umkm.kategori === 'TEMPE' ? 'green' : 'gray'}>{umkm.kategori === 'TEMPE' ? 'Tempe' : 'Umum'}</Badge>
+                    </td>
                     <td className="hidden px-5 py-3 text-gray-600 md:table-cell">{umkm.kapasitas}</td>
                     <td className="px-5 py-3">
                       <Badge tone={umkm.status === 'AKTIF' ? 'green' : 'gray'}>{umkm.status}</Badge>
@@ -224,6 +242,15 @@ export default function UmkmAdminPage() {
               error={errors.status?.message}
               {...register('status')}
             />
+            <Select
+              label="Kategori"
+              options={[
+                { value: 'UMUM', label: 'UMKM Umum' },
+                { value: 'TEMPE', label: 'UMKM Tempe' },
+              ]}
+              error={errors.kategori?.message}
+              {...register('kategori')}
+            />
             <div className="sm:col-span-2">
               <Input
                 label="Produk (pisahkan dengan koma)"
@@ -274,6 +301,35 @@ export default function UmkmAdminPage() {
                 onChange={(v) => setValue('imageUrl', v, { shouldDirty: true })}
                 ratio="aspect-[4/3]"
                 hint="JPG/PNG/WebP — otomatis diperkecil saat diunggah"
+              />
+            </div>
+          </FormSection>
+
+          <FormSection title="Media Sosial & Lokasi (opsional)">
+            <Input
+              label="WhatsApp"
+              placeholder="0812-3456-7890"
+              error={errors.whatsapp?.message}
+              {...register('whatsapp')}
+            />
+            <Input
+              label="Instagram"
+              placeholder="@username"
+              error={errors.instagram?.message}
+              {...register('instagram')}
+            />
+            <Input
+              label="TikTok"
+              placeholder="@username"
+              error={errors.tiktok?.message}
+              {...register('tiktok')}
+            />
+            <div className="sm:col-span-2">
+              <Input
+                label="Link Google Maps"
+                placeholder="https://maps.app.goo.gl/..."
+                error={errors.mapsUrl?.message}
+                {...register('mapsUrl')}
               />
             </div>
           </FormSection>

@@ -8,9 +8,14 @@ export const umkmSchema = z.object({
   noHp: z.string().min(1, 'No HP wajib diisi'),
   kapasitas: z.string().min(1, 'Kapasitas produksi wajib diisi'),
   status: z.enum(['AKTIF', 'NONAKTIF']),
+  kategori: z.enum(['UMUM', 'TEMPE']),
   produk: z.string().min(1, 'Pisahkan produk dengan tanda koma'),
   bergabungSejak: z.string().min(1, 'Bergabung sejak wajib diisi'),
   imageUrl: z.string().optional(),
+  whatsapp: z.string().optional(),
+  instagram: z.string().optional(),
+  tiktok: z.string().optional(),
+  mapsUrl: z.string().optional(),
 })
 
 export type UmkmFormValues = z.infer<typeof umkmSchema>

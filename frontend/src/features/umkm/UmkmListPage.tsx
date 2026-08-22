@@ -25,18 +25,19 @@ export default function UmkmListPage() {
     queryFn: api.getUmkmList,
   })
   const [query, setQuery] = useState('')
+  const [kategori, setKategori] = useState<string>('SEMUA')
 
   const filtered = useMemo(() => {
     if (!umkm) return []
     const q = query.trim().toLowerCase()
-    if (!q) return umkm
     return umkm.filter(
-      (item) =>
-        item.nama.toLowerCase().includes(q) ||
-        item.pemilik.toLowerCase().includes(q) ||
-        item.deskripsi.toLowerCase().includes(q),
+      (item) => {
+        const matchKategori = kategori === 'SEMUA' || item.kategori === kategori
+        const matchQuery = !q || item.nama.toLowerCase().includes(q) || item.pemilik.toLowerCase().includes(q) || item.deskripsi.toLowerCase().includes(q)
+        return matchKategori && matchQuery
+      },
     )
-  }, [umkm, query])
+  }, [umkm, query, kategori])
 
   return (
     <div>
@@ -52,15 +53,26 @@ export default function UmkmListPage() {
             title="UMKM Perajin Tempe"
             subtitle={`Daftar unit usaha tempe yang tergabung dalam ${data.nama}.`}
           />
-          <div className="relative mx-auto mt-8 max-w-md">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-stone-400" aria-hidden />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cari nama UMKM atau pemilik..."
-              className="w-full rounded-xl border border-stone-300 bg-white py-3 pl-12 pr-4 text-sm shadow-sm outline-none transition-colors placeholder:text-stone-400 focus:border-tempe-green-600 focus:ring-2 focus:ring-tempe-green-600/20"
-            />
+          <div className="relative mx-auto mt-8 flex max-w-lg items-center gap-3">
+            <select
+              value={kategori}
+              onChange={(e) => setKategori(e.target.value)}
+              className="shrink-0 rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm shadow-sm outline-none transition-colors focus:border-tempe-green-600 focus:ring-2 focus:ring-tempe-green-600/20"
+            >
+              <option value="SEMUA">Semua Kategori</option>
+              <option value="UMKM">UMKM Umum</option>
+              <option value="TEMPE">UMKM Tempe</option>
+            </select>
+            <div className="relative flex-1">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-stone-400" aria-hidden />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Cari nama UMKM atau pemilik..."
+                className="w-full rounded-xl border border-stone-300 bg-white py-3 pl-12 pr-4 text-sm shadow-sm outline-none transition-colors placeholder:text-stone-400 focus:border-tempe-green-600 focus:ring-2 focus:ring-tempe-green-600/20"
+              />
+            </div>
           </div>
         </div>
       </section>

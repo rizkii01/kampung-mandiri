@@ -17,6 +17,7 @@ export interface SiteProfile {
 }
 
 export type UmkmStatus = 'AKTIF' | 'NONAKTIF'
+export type UmkmKategori = 'UMUM' | 'TEMPE'
 
 export interface Umkm {
   id: string
@@ -27,9 +28,14 @@ export interface Umkm {
   noHp: string
   kapasitas: string
   status: UmkmStatus
+  kategori: UmkmKategori
   produk: string[]
   bergabungSejak: string
   imageUrl?: string | null
+  whatsapp?: string | null
+  instagram?: string | null
+  tiktok?: string | null
+  mapsUrl?: string | null
 }
 
 export interface NewsArticle {

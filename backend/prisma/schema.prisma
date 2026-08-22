@@ -42,9 +42,14 @@ model Umkm {
   noHp           String
   kapasitas      String
   status         String
+  kategori       String   @default("UMUM")
   produk         String
   bergabungSejak String
   imageUrl       String?
+  whatsapp       String?
+  instagram      String?
+  tiktok         String?
+  mapsUrl        String?
   createdAt      DateTime @default(now())
 }
 
